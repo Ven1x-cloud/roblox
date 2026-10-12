@@ -2,6 +2,21 @@
 
 Een eerste, veilige basis om een Roblox Studio-place via dit Git-repository met een AI-codeassistent te laten samenwerken. De bridge bestaat uit een lokale Studio-plugin en een klein Node.js-programma. De plugin exporteert een beschrijving van je wereld en scripts; de assistent kan daarna gewone bestanden in de repo aanpassen. Je bekijkt wijzigingen in Studio en past ze daar handmatig toe.
 
+> **Belangrijk:** deze repo bevat nu de hulp-plugin en bridge, nog niet de complete speelbare game. De plugin is geen Script dat je onder `Workspace` of `ServerScriptService` zet.
+
+## Welk bestand gaat waar?
+
+| Bestand/map in deze repo | Wat doe je ermee? | In Roblox zetten? |
+|---|---|---|
+| `plugin/RobloxGitBridge.plugin.lua` | Kopieer dit ene bestand naar de pluginmap die Studio opent via **Plugins → Plugins Folder**. | **Ja — dit is de plugin.** Niet in Explorer/Workspace zetten. |
+| `bridge/` en `package.json` | Start de lokale helper buiten Studio met `npm start`. | Nee. Dit draait op je computer. |
+| `studio/changes/latest.json` | De plugin leest hier een wijzigingspatch uit. | Nee. De plugin maakt de wijziging in de open place. |
+| `studio/changes/latest.example.json` | Voorbeeldpatch om de verbinding te testen. Kopieer deze naar `latest.json`. | Nee. Alleen de plugin leest dit bestand. |
+| `studio/snapshots/latest.json` | Wordt door de plugin aangemaakt wanneer je exporteert. | Nee. Dit is een beschrijving voor de repo/assistent, geen Roblox-place. |
+| `GAME_DESIGN.md` | Jouw verhaal, systemen en prototypeplan. | Nee. Alleen ontwerpnotities. |
+
+De uitgebreide installatie met uitleg per stap staat in [docs/ROBLOX_STUDIO_SETUP.md](docs/ROBLOX_STUDIO_SETUP.md).
+
 > **Belangrijk:** dit geeft de assistent geen live beeldscherm of directe toegang tot Roblox Studio. De plugin exporteert een JSON-snapshot met de objecten, posities, afmetingen, materialen, kleuren en (optioneel) scriptcode. Daarmee kan ik de structuur en code bekijken en bewerken. Een screenshot, terrein-data, de exacte geometrie van geïmporteerde meshes en willekeurige `.rbxm`-modellen worden nog niet overgezet.
 
 ## Wat zit erin?
