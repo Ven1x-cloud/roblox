@@ -10,6 +10,7 @@ Een spannende survival-avonturengame met een verhaal en een lichte tycoonlaag. D
 
 - De speler ontwaakt op een onbekend eiland. Het huisje en de spullen geven de indruk dat de groep op vakantie is; het huisje wordt later de vaste basis.
 - Rondom liggen kleine eilanden met loot. Op zee komen stormen voor die als een muur de bekende wereld omsluiten.
+- Werknaam voor het mysterieuze oceaangebied: de **Berumida-driehoek**, een fictieve, speelse verwijzing naar de echte Bermudadriehoek en de verhalen over mysteries daar.
 - Berichten en aanwijzingen die de groep tijdens de ontsnapping achterliet, brengen herinneringen terug.
 - De waarheid: de speler en vrienden waren professoren die vreemde verschijnselen in de oceaan onderzochten. Na een doorbraak kwam een glitch in de wereld vrij. De groep ontsnapte, maar werd gehersenspoeld en weet niet meer wat er is gebeurd.
 - Verderop zijn drie andere professoren te vinden. Ze waren ziek en hielden zich schuil toen ze merkten dat er iets mis was; zij onthullen een groot deel van het verleden.
