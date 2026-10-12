@@ -1,5 +1,5 @@
 {
-  "placeName": "Place1",
+  "placeName": "Place2",
   "roots": [
     {
       "path": [
@@ -12,104 +12,6 @@
       "name": "Workspace",
       "className": "Workspace",
       "children": [
-        {
-          "path": [
-            {
-              "ordinal": 1,
-              "name": "Workspace",
-              "className": "Workspace"
-            },
-            {
-              "ordinal": 1,
-              "name": "Camera",
-              "className": "Camera"
-            }
-          ],
-          "name": "Camera",
-          "className": "Camera",
-          "children": []
-        },
-        {
-          "path": [
-            {
-              "ordinal": 1,
-              "name": "Workspace",
-              "className": "Workspace"
-            },
-            {
-              "ordinal": 1,
-              "name": "Baseplate",
-              "className": "Part"
-            }
-          ],
-          "name": "Baseplate",
-          "className": "Part",
-          "properties": {
-            "CanQuery": true,
-            "CanCollide": true,
-            "Color": [
-              0.35686275362968445,
-              0.35686275362968445,
-              0.35686275362968445
-            ],
-            "Anchored": true,
-            "CanTouch": true,
-            "Shape": "Block",
-            "Transparency": 0,
-            "Reflectance": 0,
-            "Position": [
-              0,
-              -8,
-              0
-            ],
-            "Orientation": [
-              0,
-              0,
-              0
-            ],
-            "Material": "Plastic",
-            "CastShadow": true,
-            "Size": [
-              2048,
-              16,
-              2048
-            ]
-          },
-          "children": [
-            {
-              "path": [
-                {
-                  "ordinal": 1,
-                  "name": "Workspace",
-                  "className": "Workspace"
-                },
-                {
-                  "ordinal": 1,
-                  "name": "Baseplate",
-                  "className": "Part"
-                },
-                {
-                  "ordinal": 1,
-                  "name": "Texture",
-                  "className": "Texture"
-                }
-              ],
-              "name": "Texture",
-              "className": "Texture",
-              "properties": {
-                "Face": "Top",
-                "Transparency": 0.800000011920929,
-                "Color3": [
-                  0,
-                  0,
-                  0
-                ],
-                "Texture": "rbxassetid://6372755229"
-              },
-              "children": []
-            }
-          ]
-        },
         {
           "path": [
             {
@@ -239,14 +141,523 @@
               "children": []
             }
           ]
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Workspace",
+              "className": "Workspace"
+            },
+            {
+              "ordinal": 1,
+              "name": "Baseplate",
+              "className": "Part"
+            }
+          ],
+          "name": "Baseplate",
+          "className": "Part",
+          "properties": {
+            "CanQuery": true,
+            "CanCollide": true,
+            "Color": [
+              0.35686275362968445,
+              0.35686275362968445,
+              0.35686275362968445
+            ],
+            "Anchored": true,
+            "CanTouch": true,
+            "Shape": "Block",
+            "Transparency": 0,
+            "Reflectance": 0,
+            "Position": [
+              0,
+              -8,
+              0
+            ],
+            "Orientation": [
+              0,
+              0,
+              0
+            ],
+            "Material": "Plastic",
+            "CastShadow": true,
+            "Size": [
+              2048,
+              16,
+              2048
+            ]
+          },
+          "children": [
+            {
+              "path": [
+                {
+                  "ordinal": 1,
+                  "name": "Workspace",
+                  "className": "Workspace"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "Baseplate",
+                  "className": "Part"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "Texture",
+                  "className": "Texture"
+                }
+              ],
+              "name": "Texture",
+              "className": "Texture",
+              "properties": {
+                "Face": "Top",
+                "Transparency": 0.800000011920929,
+                "Color3": [
+                  0,
+                  0,
+                  0
+                ],
+                "Texture": "rbxassetid://6372755229"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Workspace",
+              "className": "Workspace"
+            },
+            {
+              "ordinal": 1,
+              "name": "Camera",
+              "className": "Camera"
+            }
+          ],
+          "name": "Camera",
+          "className": "Camera",
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "ReplicatedFirst",
+          "className": "ReplicatedFirst"
+        }
+      ],
+      "name": "ReplicatedFirst",
+      "className": "ReplicatedFirst",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "ReplicatedStorage",
+          "className": "ReplicatedStorage"
+        }
+      ],
+      "name": "ReplicatedStorage",
+      "className": "ReplicatedStorage",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "ServerScriptService",
+          "className": "ServerScriptService"
+        }
+      ],
+      "name": "ServerScriptService",
+      "className": "ServerScriptService",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "ServerStorage",
+          "className": "ServerStorage"
+        }
+      ],
+      "name": "ServerStorage",
+      "className": "ServerStorage",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "StarterGui",
+          "className": "StarterGui"
+        }
+      ],
+      "name": "StarterGui",
+      "className": "StarterGui",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "StarterPack",
+          "className": "StarterPack"
+        }
+      ],
+      "name": "StarterPack",
+      "className": "StarterPack",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "StarterPlayer",
+          "className": "StarterPlayer"
+        }
+      ],
+      "name": "StarterPlayer",
+      "className": "StarterPlayer",
+      "children": [
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "StarterPlayer",
+              "className": "StarterPlayer"
+            },
+            {
+              "ordinal": 1,
+              "name": "StarterPlayerScripts",
+              "className": "StarterPlayerScripts"
+            }
+          ],
+          "name": "StarterPlayerScripts",
+          "className": "StarterPlayerScripts",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "StarterPlayer",
+              "className": "StarterPlayer"
+            },
+            {
+              "ordinal": 1,
+              "name": "StarterCharacterScripts",
+              "className": "StarterCharacterScripts"
+            }
+          ],
+          "name": "StarterCharacterScripts",
+          "className": "StarterCharacterScripts",
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "Lighting",
+          "className": "Lighting"
+        }
+      ],
+      "name": "Lighting",
+      "className": "Lighting",
+      "children": [
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Lighting",
+              "className": "Lighting"
+            },
+            {
+              "ordinal": 1,
+              "name": "Sky",
+              "className": "Sky"
+            }
+          ],
+          "name": "Sky",
+          "className": "Sky",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Lighting",
+              "className": "Lighting"
+            },
+            {
+              "ordinal": 1,
+              "name": "SunRays",
+              "className": "SunRaysEffect"
+            }
+          ],
+          "name": "SunRays",
+          "className": "SunRaysEffect",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Lighting",
+              "className": "Lighting"
+            },
+            {
+              "ordinal": 1,
+              "name": "Atmosphere",
+              "className": "Atmosphere"
+            }
+          ],
+          "name": "Atmosphere",
+          "className": "Atmosphere",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Lighting",
+              "className": "Lighting"
+            },
+            {
+              "ordinal": 1,
+              "name": "Bloom",
+              "className": "BloomEffect"
+            }
+          ],
+          "name": "Bloom",
+          "className": "BloomEffect",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "Lighting",
+              "className": "Lighting"
+            },
+            {
+              "ordinal": 1,
+              "name": "DepthOfField",
+              "className": "DepthOfFieldEffect"
+            }
+          ],
+          "name": "DepthOfField",
+          "className": "DepthOfFieldEffect",
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "SoundService",
+          "className": "SoundService"
+        }
+      ],
+      "name": "SoundService",
+      "className": "SoundService",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "Teams",
+          "className": "Teams"
+        }
+      ],
+      "name": "Teams",
+      "className": "Teams",
+      "children": []
+    },
+    {
+      "path": [
+        {
+          "ordinal": 1,
+          "name": "TextChatService",
+          "className": "TextChatService"
+        }
+      ],
+      "name": "TextChatService",
+      "className": "TextChatService",
+      "children": [
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "TextChatService",
+              "className": "TextChatService"
+            },
+            {
+              "ordinal": 1,
+              "name": "ChatWindowConfiguration",
+              "className": "ChatWindowConfiguration"
+            }
+          ],
+          "name": "ChatWindowConfiguration",
+          "className": "ChatWindowConfiguration",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "TextChatService",
+              "className": "TextChatService"
+            },
+            {
+              "ordinal": 1,
+              "name": "ChatInputBarConfiguration",
+              "className": "ChatInputBarConfiguration"
+            }
+          ],
+          "name": "ChatInputBarConfiguration",
+          "className": "ChatInputBarConfiguration",
+          "children": []
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "TextChatService",
+              "className": "TextChatService"
+            },
+            {
+              "ordinal": 1,
+              "name": "BubbleChatConfiguration",
+              "className": "BubbleChatConfiguration"
+            }
+          ],
+          "name": "BubbleChatConfiguration",
+          "className": "BubbleChatConfiguration",
+          "children": [
+            {
+              "path": [
+                {
+                  "ordinal": 1,
+                  "name": "TextChatService",
+                  "className": "TextChatService"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "BubbleChatConfiguration",
+                  "className": "BubbleChatConfiguration"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "UIGradient",
+                  "className": "UIGradient"
+                }
+              ],
+              "name": "UIGradient",
+              "className": "UIGradient",
+              "children": []
+            },
+            {
+              "path": [
+                {
+                  "ordinal": 1,
+                  "name": "TextChatService",
+                  "className": "TextChatService"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "BubbleChatConfiguration",
+                  "className": "BubbleChatConfiguration"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "ImageLabel",
+                  "className": "ImageLabel"
+                }
+              ],
+              "name": "ImageLabel",
+              "className": "ImageLabel",
+              "children": []
+            },
+            {
+              "path": [
+                {
+                  "ordinal": 1,
+                  "name": "TextChatService",
+                  "className": "TextChatService"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "BubbleChatConfiguration",
+                  "className": "BubbleChatConfiguration"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "UICorner",
+                  "className": "UICorner"
+                }
+              ],
+              "name": "UICorner",
+              "className": "UICorner",
+              "children": []
+            },
+            {
+              "path": [
+                {
+                  "ordinal": 1,
+                  "name": "TextChatService",
+                  "className": "TextChatService"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "BubbleChatConfiguration",
+                  "className": "BubbleChatConfiguration"
+                },
+                {
+                  "ordinal": 1,
+                  "name": "UIPadding",
+                  "className": "UIPadding"
+                }
+              ],
+              "name": "UIPadding",
+              "className": "UIPadding",
+              "children": []
+            }
+          ]
+        },
+        {
+          "path": [
+            {
+              "ordinal": 1,
+              "name": "TextChatService",
+              "className": "TextChatService"
+            },
+            {
+              "ordinal": 1,
+              "name": "ChannelTabsConfiguration",
+              "className": "ChannelTabsConfiguration"
+            }
+          ],
+          "name": "ChannelTabsConfiguration",
+          "className": "ChannelTabsConfiguration",
+          "children": []
         }
       ]
     }
   ],
   "includeScripts": true,
   "selectedOnly": false,
-  "placeId": 0,
+  "placeId": 93153454648331,
   "schemaVersion": 1,
-  "exportedAt": "2026-10-12T15:32:25Z",
-  "receivedAt": "2026-10-12T15:32:25.256Z"
+  "exportedAt": "2026-10-12T15:58:18Z",
+  "receivedAt": "2026-10-12T15:58:21.942Z"
 }
