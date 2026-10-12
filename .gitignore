@@ -1,0 +1,18 @@
+# Local secrets and credentials: automatic Git sync must never publish these.
+.env
+.env.*
+!.env.example
+.netrc
+.git-credentials
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local tooling/build output.
+node_modules/
+*.tmp
+npm-debug.log*
+.DS_Store
+Thumbs.db

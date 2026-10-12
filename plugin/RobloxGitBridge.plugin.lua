@@ -6,6 +6,7 @@ local HttpService = game:GetService("HttpService")
 local Selection = game:GetService("Selection")
 local ChangeHistoryService = game:GetService("ChangeHistoryService")
 local ScriptEditorService = game:GetService("ScriptEditorService")
+local RunService = game:GetService("RunService")
 
 local PLUGIN_ID = "RobloxGitBridgeDockWidget_v1"
 local MAX_INSTANCES = 3000
@@ -16,7 +17,7 @@ local MAX_OPERATIONS = 500
 local toolbar = plugin:CreateToolbar("Roblox Git Bridge")
 local openButton = toolbar:CreateButton(
 	"Roblox Git Bridge",
-	"Open the local Git bridge for snapshots and reviewed changes",
+	"Open automatic Roblox Studio and GitHub sync controls",
 	""
 )
 openButton.ClickableWhenViewportHidden = true
@@ -125,7 +126,7 @@ end
 
 addLabel("Roblox Git Bridge", 28, Color3.fromRGB(255, 255, 255), 20)
 addLabel(
-	"Exporteer je wereld naar de repo. Bekijk een patch eerst; toepassen is altijd handmatig.",
+	"Koppel Studio aan de repo. Automatische sync en patch-toepassing kun je hieronder apart aan- of uitzetten.",
 	42,
 	Color3.fromRGB(175, 187, 205),
 	12
@@ -161,6 +162,8 @@ local toggleScriptsButton = make("TextButton", {
 	TextColor3 = Color3.fromRGB(255, 255, 255),
 	TextSize = 11,
 }, row)
+local autoSyncButton = addButton("Automatische wereldsync: AAN", Color3.fromRGB(45, 118, 99))
+local autoApplyToggleButton = addButton("AI-patches automatisch toepassen: AAN", Color3.fromRGB(146, 98, 47))
 
 local statusLabel = addLabel("Status: start de lokale bridge en test de verbinding.", 170, Color3.fromRGB(174, 205, 190), 12)
 statusLabel.TextYAlignment = Enum.TextYAlignment.Top
@@ -171,9 +174,9 @@ local previewButton = addButton("Wijzigingen bekijken", Color3.fromRGB(111, 83, 
 local applyButton = addButton("Voorbeeld toepassen", Color3.fromRGB(183, 104, 45))
 applyButton.Visible = false
 addLabel(
-	"Export maakt een JSON-snapshot in studio/snapshots. De bridge doet geen Git-commit of push. " ..
-	"Lees scriptwijzigingen na voordat je ze toepast.",
-	52,
+	"Auto-sync monitort Workspace en game-scripts, commit/pusht alle repo-wijzigingen en past nieuwe AI-patches automatisch toe. " ..
+	"Zet de knoppen hierboven uit als je eerst wilt controleren.",
+	58,
 	Color3.fromRGB(155, 169, 190),
 	11
 )
@@ -187,13 +190,26 @@ if type(storedToken) == "string" then
 	tokenBox.Text = storedToken
 end
 local includeScripts = plugin:GetSetting("RobloxGitBridgeIncludeScripts") ~= false
+local autoSyncEnabled = plugin:GetSetting("RobloxGitBridgeAutoSync") ~= false
+local autoApplyEnabled = plugin:GetSetting("RobloxGitBridgeAutoApply") ~= false
 local pendingChangeSet = nil
 local busy = false
+local autoSyncGeneration = 0
+local lastAutoPollError = nil
 
 local function refreshScriptsButton()
 	toggleScriptsButton.Text = includeScripts and "Scripts: AAN" or "Scripts: UIT"
 end
+
+local function refreshAutomationButtons()
+	autoSyncButton.Text = autoSyncEnabled and "Automatische wereldsync: AAN" or "Automatische wereldsync: UIT"
+	autoApplyToggleButton.Text = autoApplyEnabled and "AI-patches automatisch toepassen: AAN" or "AI-patches automatisch toepassen: UIT"
+	autoSyncButton.BackgroundColor3 = autoSyncEnabled and Color3.fromRGB(45, 118, 99) or Color3.fromRGB(70, 76, 91)
+	autoApplyToggleButton.BackgroundColor3 = autoApplyEnabled and Color3.fromRGB(146, 98, 47) or Color3.fromRGB(70, 76, 91)
+end
+
 refreshScriptsButton()
+refreshAutomationButtons()
 
 local function setStatus(message, isError)
 	statusLabel.Text = "Status: " .. tostring(message)
@@ -222,6 +238,8 @@ local function saveSettings()
 	plugin:SetSetting("RobloxGitBridgeUrl", urlBox.Text)
 	plugin:SetSetting("RobloxGitBridgeToken", tokenBox.Text)
 	plugin:SetSetting("RobloxGitBridgeIncludeScripts", includeScripts)
+	plugin:SetSetting("RobloxGitBridgeAutoSync", autoSyncEnabled)
+	plugin:SetSetting("RobloxGitBridgeAutoApply", autoApplyEnabled)
 end
 
 local function request(method, route, payload, useToken)
@@ -402,6 +420,34 @@ local function rootSelection(selection)
 	return roots
 end
 
+local AUTO_SYNC_SERVICES = {
+	"Workspace",
+	"ReplicatedFirst",
+	"ReplicatedStorage",
+	"ServerScriptService",
+	"ServerStorage",
+	"StarterGui",
+	"StarterPack",
+	"StarterPlayer",
+	"Lighting",
+	"SoundService",
+	"Teams",
+	"TextChatService",
+}
+
+local function getAutoExportRoots()
+	local roots = {}
+	for _, serviceName in ipairs(AUTO_SYNC_SERVICES) do
+		local ok, service = pcall(function()
+			return game:GetService(serviceName)
+		end)
+		if ok and service then
+			table.insert(roots, service)
+		end
+	end
+	return roots
+end
+
 local function exportInstances(instances, selectedOnly)
 	if #instances == 0 then
 		error("Er zijn geen objecten om te exporteren.")
@@ -537,8 +583,12 @@ local function resolvePath(path)
 	validatePath(path, "object path")
 	local current = game
 	local startIndex = 1
-	if path[1].name == "Workspace" and path[1].className == "Workspace" then
-		current = workspace
+	local first = path[1]
+	local serviceOk, service = pcall(function()
+		return game:GetService(first.className)
+	end)
+	if serviceOk and service.Name == first.name and service.ClassName == first.className then
+		current = service
 		startIndex = 2
 	end
 	for index = startIndex, #path do
@@ -769,6 +819,174 @@ local function run(action)
 	end
 end
 
+local function gitResultText(result)
+	local git = type(result) == "table" and result.git or nil
+	if type(git) ~= "table" or not git.enabled then
+		return " Git-auto-sync staat uit; de snapshot is alleen lokaal opgeslagen."
+	end
+	if not git.ok then
+		return " Snapshot lokaal opgeslagen, maar Git-auto-sync is gestopt: " .. tostring(git.error)
+	end
+	if git.pushed then
+		return " Automatisch gecommit en gepusht naar " .. tostring(git.branch) .. "."
+	end
+	return " " .. tostring(git.message or "Geen nieuwe repo-wijzigingen om te pushen.")
+end
+
+local function applyChangeSet(changeSet, automatic)
+	validateChangeSet(changeSet)
+	if plugin:GetSetting("RobloxGitBridgeLastAppliedId") == changeSet.id then
+		error("Deze patch-id is al toegepast.")
+	end
+
+	pcall(function()
+		ChangeHistoryService:SetWaypoint("Before Roblox Git Bridge: " .. changeSet.id)
+	end)
+	local completed = 0
+	for index, operation in ipairs(changeSet.operations) do
+		local operationOk, operationError = pcall(function()
+			applyOperation(operation)
+		end)
+		if not operationOk then
+			pcall(function()
+				ChangeHistoryService:SetWaypoint("Partial Roblox Git Bridge: " .. changeSet.id)
+			end)
+			pendingChangeSet = changeSet
+			applyButton.Visible = true
+			if automatic then
+				plugin:SetSetting("RobloxGitBridgeLastAutoFailedId", changeSet.id)
+			end
+			error(
+				"Toepassen stopte bij operatie " .. tostring(index) .. ". " .. tostring(completed) ..
+				" eerdere operatie(s) kunnen al zijn toegepast. Gebruik Studio Ctrl+Z om terug te draaien.\n" ..
+				tostring(operationError)
+			)
+		end
+		completed += 1
+	end
+
+	pcall(function()
+		ChangeHistoryService:SetWaypoint("After Roblox Git Bridge: " .. changeSet.id)
+	end)
+	plugin:SetSetting("RobloxGitBridgeLastAppliedId", changeSet.id)
+	pendingChangeSet = nil
+	applyButton.Visible = false
+	local mode = automatic and "automatisch toegepast" or "toegepast"
+	setStatus("Patch " .. mode .. " (" .. tostring(completed) .. " operaties). Scriptcode is niet door de plugin uitgevoerd.", false)
+end
+
+local function scheduleAutoSync(reason)
+	if not autoSyncEnabled or not RunService:IsEdit() then
+		return
+	end
+	local tokenText = string.gsub(tokenBox.Text or "", "%s", "")
+	if tokenText == "" then
+		return
+	end
+
+	autoSyncGeneration += 1
+	local myGeneration = autoSyncGeneration
+	task.delay(3, function()
+		if myGeneration ~= autoSyncGeneration or not autoSyncEnabled or not RunService:IsEdit() then
+			return
+		end
+		if busy then
+			scheduleAutoSync(reason)
+			return
+		end
+		run(function()
+			setStatus("Workspace/scripts zijn gewijzigd; automatische export, commit en push…", false)
+			local result, counters = exportInstances(getAutoExportRoots(), false)
+			local detail = tostring(counters.instances) .. " objecten, " .. tostring(counters.scripts) .. " scripts."
+			local gitText = gitResultText(result)
+			setStatus("Auto-sync klaar: " .. detail .. gitText, result.git and result.git.enabled and not result.git.ok)
+		end)
+	end)
+end
+
+local basePartSnapshotProperties = {
+	CFrame = true, Size = true, Position = true, Orientation = true, Anchored = true,
+	CanCollide = true, CanTouch = true, CanQuery = true, CastShadow = true,
+	Transparency = true, Reflectance = true, Color = true, Material = true, Shape = true,
+}
+local lightSnapshotProperties = {
+	Enabled = true, Brightness = true, Range = true, Color = true, Shadows = true, Angle = true, Face = true,
+}
+
+local function snapshotRelevantProperty(instance, propertyName)
+	if propertyName == "Name" or propertyName == "Parent" then
+		return true
+	end
+	if instance:IsA("BasePart") then
+		return basePartSnapshotProperties[propertyName] == true
+	end
+	if instance:IsA("LuaSourceContainer") then
+		return propertyName == "Source" or propertyName == "Disabled"
+	end
+	if instance:IsA("PointLight") or instance:IsA("SpotLight") then
+		return lightSnapshotProperties[propertyName] == true
+	end
+	if instance:IsA("Attachment") then
+		return propertyName == "Position" or propertyName == "Orientation"
+	end
+	if instance:IsA("Decal") or instance:IsA("Texture") then
+		return propertyName == "Texture" or propertyName == "Transparency" or propertyName == "Face" or propertyName == "Color3"
+	end
+	return false
+end
+
+local watchedInstances = {}
+local rootConnections = {}
+local function watchTree(root)
+	local function watch(instance)
+		if watchedInstances[instance] then
+			return
+		end
+		local ok, connection = pcall(function()
+			return instance.Changed:Connect(function(propertyName)
+				if snapshotRelevantProperty(instance, propertyName) then
+					scheduleAutoSync("property change")
+				end
+			end)
+		end)
+		if ok then
+			watchedInstances[instance] = connection
+		end
+		for _, child in ipairs(instance:GetChildren()) do
+			watch(child)
+		end
+	end
+	watch(root)
+end
+
+local function unwatchTree(root)
+	local function unwatch(instance)
+		for _, child in ipairs(instance:GetChildren()) do
+			unwatch(child)
+		end
+		local connection = watchedInstances[instance]
+		if connection then
+			connection:Disconnect()
+			watchedInstances[instance] = nil
+		end
+	end
+	unwatch(root)
+end
+
+local function startAutoMonitor()
+	for _, root in ipairs(getAutoExportRoots()) do
+		watchTree(root)
+		table.insert(rootConnections, root.DescendantAdded:Connect(function(instance)
+			watchTree(instance)
+			scheduleAutoSync("object added")
+		end))
+		table.insert(rootConnections, root.DescendantRemoving:Connect(function(instance)
+			scheduleAutoSync("object removed")
+			unwatchTree(instance)
+		end))
+	end
+end
+
 openButton.Click:Connect(function()
 	widget.Enabled = not widget.Enabled
 end)
@@ -780,7 +998,11 @@ saveTestButton.Activated:Connect(function()
 		if type(result) ~= "table" or result.ok ~= true then
 			error("De lokale bridge gaf geen geldige health-response terug.")
 		end
-		setStatus("Verbinding werkt met " .. tostring(result.service) .. ". De token is lokaal opgeslagen.", false)
+		local gitText = result.autoGitEnabled and (" Auto Git pusht op " .. tostring(result.branch) .. ".") or " Auto Git staat uit in de bridge."
+		setStatus("Verbinding werkt met " .. tostring(result.service) .. "." .. gitText, false)
+		if autoSyncEnabled then
+			scheduleAutoSync("initial sync")
+		end
 	end)
 end)
 
@@ -788,7 +1010,30 @@ toggleScriptsButton.Activated:Connect(function()
 	includeScripts = not includeScripts
 	refreshScriptsButton()
 	saveSettings()
-	setStatus(includeScripts and "Scriptbroncode wordt meegenomen in nieuwe snapshots." or "Scriptbroncode wordt overgeslagen in nieuwe snapshots.", false)
+	setStatus(includeScripts and "Scriptbroncode gaat mee in automatische exports." or "Scriptbroncode wordt overgeslagen in exports.", false)
+end)
+
+autoSyncButton.Activated:Connect(function()
+	autoSyncEnabled = not autoSyncEnabled
+	autoSyncGeneration += 1
+	refreshAutomationButtons()
+	saveSettings()
+	if autoSyncEnabled then
+		setStatus("Automatische wereldsync staat aan. Wijzigingen worden na drie seconden rust geëxporteerd en gepusht.", false)
+		scheduleAutoSync("sync enabled")
+	else
+		setStatus("Automatische wereldsync staat uit. De handmatige exportknoppen blijven beschikbaar.", false)
+	end
+end)
+
+autoApplyToggleButton.Activated:Connect(function()
+	autoApplyEnabled = not autoApplyEnabled
+	refreshAutomationButtons()
+	saveSettings()
+	setStatus(
+		autoApplyEnabled and "Nieuwe patches van de werkbranch worden zonder preview toegepast." or "Automatisch toepassen staat uit; gebruik Wijzigingen bekijken en Voorbeeld toepassen.",
+		false
+	)
 end)
 
 exportWorkspaceButton.Activated:Connect(function()
@@ -798,9 +1043,8 @@ exportWorkspaceButton.Activated:Connect(function()
 		local result, counters = exportInstances({ workspace }, false)
 		setStatus(
 			"Snapshot opgeslagen: " .. tostring(result.file) .. "\n" ..
-			tostring(counters.instances) .. " objecten, " .. tostring(counters.scripts) .. " scripts. " ..
-			"Commit/push de snapshot zelf als je hem in GitHub wilt bewaren.",
-			false
+			tostring(counters.instances) .. " objecten, " .. tostring(counters.scripts) .. " scripts." .. gitResultText(result),
+			result.git and result.git.enabled and not result.git.ok
 		)
 	end)
 end)
@@ -813,8 +1057,8 @@ exportSelectionButton.Activated:Connect(function()
 		local result, counters = exportInstances(selectedRoots, true)
 		setStatus(
 			"Snapshot opgeslagen: " .. tostring(result.file) .. "\n" ..
-			tostring(counters.instances) .. " objecten, " .. tostring(counters.scripts) .. " scripts.",
-			false
+			tostring(counters.instances) .. " objecten, " .. tostring(counters.scripts) .. " scripts." .. gitResultText(result),
+			result.git and result.git.enabled and not result.git.ok
 		)
 	end)
 end)
@@ -825,8 +1069,7 @@ previewButton.Activated:Connect(function()
 		setStatus("Laatste wijzigingsbestand wordt opgehaald…", false)
 		local changeSet = request("GET", "/v1/changes", nil, true)
 		validateChangeSet(changeSet)
-		local lastApplied = plugin:GetSetting("RobloxGitBridgeLastAppliedId")
-		if lastApplied == changeSet.id then
+		if plugin:GetSetting("RobloxGitBridgeLastAppliedId") == changeSet.id then
 			pendingChangeSet = nil
 			applyButton.Visible = false
 			error("Deze patch-id is al toegepast. Geef een nieuwe patch een nieuwe id.")
@@ -844,51 +1087,93 @@ previewButton.Activated:Connect(function()
 			end
 			table.insert(lines, operationDescription(operation))
 		end
-		setStatus(table.concat(lines, "\n") .. "\nKlik Voorbeeld toepassen pas nadat je de patch hebt gecontroleerd.", false)
+		setStatus(
+			table.concat(lines, "\n") ..
+			(autoApplyEnabled and "\nAutomatisch toepassen staat aan." or "\nKlik Voorbeeld toepassen nadat je de patch hebt gecontroleerd."),
+			false
+		)
 	end)
 end)
 
 applyButton.Activated:Connect(function()
 	run(function()
-		local changeSet = pendingChangeSet
-		if not changeSet then
+		if not pendingChangeSet then
 			error("Haal eerst een patch op met Wijzigingen bekijken.")
 		end
-		validateChangeSet(changeSet)
-		if plugin:GetSetting("RobloxGitBridgeLastAppliedId") == changeSet.id then
-			error("Deze patch-id is al toegepast.")
-		end
-
-		pcall(function()
-			ChangeHistoryService:SetWaypoint("Before Roblox Git Bridge: " .. changeSet.id)
-		end)
-		local completed = 0
-		for index, operation in ipairs(changeSet.operations) do
-			local operationOk, operationError = pcall(function()
-				applyOperation(operation)
-			end)
-			if not operationOk then
-				pcall(function()
-					ChangeHistoryService:SetWaypoint("Partial Roblox Git Bridge: " .. changeSet.id)
-				end)
-				pendingChangeSet = nil
-				applyButton.Visible = false
-				error(
-					"Toepassen stopte bij operatie " .. tostring(index) .. ". " .. tostring(completed) ..
-					" eerdere operatie(s) kunnen al zijn toegepast. Gebruik Studio Ctrl+Z om terug te draaien.\n" ..
-					tostring(operationError)
-				)
-			end
-			completed += 1
-		end
-		pcall(function()
-			ChangeHistoryService:SetWaypoint("After Roblox Git Bridge: " .. changeSet.id)
-		end)
-		plugin:SetSetting("RobloxGitBridgeLastAppliedId", changeSet.id)
-		pendingChangeSet = nil
-		applyButton.Visible = false
-		setStatus("Patch toegepast (" .. tostring(completed) .. " operaties). De code is niet door de plugin uitgevoerd.", false)
+		applyChangeSet(pendingChangeSet, false)
 	end)
 end)
 
-setStatus("Start npm start in de repo, plak de token en test de verbinding.", false)
+local function pollAndApplyLatest()
+	if not autoApplyEnabled or busy or not RunService:IsEdit() then
+		return
+	end
+	if string.gsub(tokenBox.Text or "", "%s", "") == "" then
+		return
+	end
+
+	local ok, changeSetOrError = pcall(function()
+		return request("GET", "/v1/changes", nil, true)
+	end)
+	if not ok then
+		local message = tostring(changeSetOrError)
+		if string.find(message, "No change set exists yet", 1, true) then
+			lastAutoPollError = nil
+			return
+		end
+		if message ~= lastAutoPollError then
+			lastAutoPollError = message
+			setStatus("Automatisch ophalen gestopt: " .. message, true)
+		end
+		return
+	end
+
+	lastAutoPollError = nil
+	local changeSet = changeSetOrError
+	local validationOk, validationError = pcall(function()
+		validateChangeSet(changeSet)
+	end)
+	if not validationOk then
+		setStatus("De opgehaalde patch is ongeldig: " .. tostring(validationError), true)
+		return
+	end
+	if plugin:GetSetting("RobloxGitBridgeLastAppliedId") == changeSet.id then
+		return
+	end
+	if plugin:GetSetting("RobloxGitBridgeLastAutoFailedId") == changeSet.id then
+		return
+	end
+
+	pendingChangeSet = changeSet
+	setStatus("Nieuwe patch '" .. changeSet.id .. "' ontvangen; automatisch toepassen…", false)
+	run(function()
+		applyChangeSet(changeSet, true)
+	end)
+end
+
+startAutoMonitor()
+if autoSyncEnabled then
+	scheduleAutoSync("initial snapshot")
+end
+
+task.spawn(function()
+	while true do
+		task.wait(8)
+		pollAndApplyLatest()
+	end
+end)
+
+plugin.Unloading:Connect(function()
+	for _, connection in pairs(watchedInstances) do
+		connection:Disconnect()
+	end
+	for _, connection in ipairs(rootConnections) do
+		connection:Disconnect()
+	end
+end)
+
+setStatus(
+	"Automatische wereldsync " .. (autoSyncEnabled and "AAN" or "UIT") .. ", AI-patches automatisch toepassen " ..
+	(autoApplyEnabled and "AAN" or "UIT") .. ". Start npm start en plak de token.",
+	false
+)

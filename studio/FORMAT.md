@@ -70,4 +70,4 @@ Toegestane propertynamen zijn class-afhankelijk. De plugin ondersteunt o.a.:
 
 Vector3- en Color3-waarden zijn arrays van drie getallen. Colors liggen tussen 0 en 1. Enum-propertywaarden zijn strings, bijvoorbeeld `"Neon"`, `"Ball"` of `"Top"`. `Source` is geen property die via `set` kan worden gewijzigd.
 
-De plugin toont eerst een preview en past de operaties daarna één voor één toe. Als een operatie tijdens het toepassen mislukt, kunnen eerdere operaties al zijn toegepast; Studio-undo-waypoints maken terugdraaien mogelijk.
+Met **AI-patches automatisch toepassen** aan past de plugin een nieuwe patch-id zonder preview toe. Zet die knop uit om eerst **Wijzigingen bekijken** te gebruiken. Operaties worden één voor één uitgevoerd; als een operatie mislukt, kunnen eerdere operaties al zijn toegepast. Studio-undo-waypoints helpen met terugdraaien, maar maak voor auto-apply altijd eerst een place-kopie. Een patch die al is toegepast, moet voor een nieuwe versie een nieuwe `id` krijgen.

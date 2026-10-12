@@ -1,127 +1,136 @@
-# In Roblox Studio zetten — stap voor stap
+# Roblox Studio koppelen — stap voor stap
 
-Dit is de praktische uitleg voor het huidige repo. **Je hoeft maar één bestand in de pluginmap van Roblox Studio te zetten:**
+## Wat zet je in Roblox?
+
+**Alleen dit bestand** gaat in de lokale pluginmap van Roblox Studio:
 
 ```text
 plugin/RobloxGitBridge.plugin.lua
 ```
 
-> Dit bestand is een **Studio-plugin**, geen script voor je spel. Zet het dus niet in `Workspace`, `ServerScriptService`, `StarterPlayerScripts` of een andere plek in de Explorer. De huidige repo bevat nog geen complete speelbare game; de plugin is het gereedschap waarmee we later je Studio-place met de repo kunnen uitwisselen.
+Dit is een **Studio-plugin**, geen script van je game. Zet het niet onder `Workspace`, `ServerScriptService` of ergens anders in de Explorer. De bridge-bestanden en JSON-patches blijven in de repo op je computer.
 
-## Eerst het verschil tussen de twee dingen
+> De repo bevat de bridge en het gameplan; nog niet de complete speelbare game. De plugin kan een place aanpassen, maar slaat/publiceert die place niet automatisch op Roblox op.
 
-- **Roblox Studio** is de editor waarin je place openstaat. De plugin verschijnt in de Studio-toolbar en kan de place die je op dat moment open hebt uitlezen of aanpassen.
-- **De lokale bridge** is een klein programma dat op je eigen computer draait. Het schrijft exports naar de lokale kopie van deze Git-repo en leest er wijzigingspatches uit.
-- **GitHub** is de online kopie. De plugin pusht daar niet rechtstreeks naartoe en bevat geen GitHub-token. Jij gebruikt Git om wijzigingen naar GitHub te sturen of daarvandaan op te halen.
+## Hoe de onderdelen samenwerken
 
-## 1. Open de juiste repo-map op je computer
+- De Studio-plugin kijkt naar de geopende place en exporteert relevante objecten en, als **Scripts: AAN** staat, scriptbroncode.
+- Het Node-programma (`npm start`) draait lokaal en schrijft exports in deze repo.
+- De lokale bridge gebruikt je eigen Git-configuratie om commits naar `arena/777e60cb-roblox` te pushen. Er staat geen GitHub-token in de plugin.
+- Nieuwe assistent-patches worden op diezelfde branch opgehaald; daarna kan de plugin ze automatisch in de open place toepassen.
 
-Je hebt een lokale kopie/checkout van deze repo nodig. Open die map in Verkenner/Finder en controleer dat je `package.json` en de mappen `plugin`, `bridge` en `studio` ziet.
+## 1. Zorg voor de bijgewerkte lokale repo
 
-Als je met Git werkt: gebruik de branch die je voor dit project gebruikt. De bridge kiest zelf geen branch en voert geen Git-commando's uit.
+Auto-sync werkt alleen vanuit een lokale Git-checkout van deze repo op branch `arena/777e60cb-roblox`.
 
-## 2. Installeer de plugin in Roblox Studio
+Als je de repo al hebt, open een terminal in de repo-hoofdmap en werk hem bij:
+
+```sh
+git pull --ff-only origin arena/777e60cb-roblox
+```
+
+Je moet in die map `package.json`, `bridge/`, `plugin/` en `studio/` kunnen zien. Auto-sync commit **alle gewijzigde bestanden**. Controleer daarom eerst dat er geen geheimen of onverwachte bestanden klaarstaan. De meegeleverde `.gitignore` sluit gebruikelijke lokale credentials, keys en buildbestanden uit.
+
+## 2. Installeer of vervang de Studio-plugin
 
 1. Open Roblox Studio.
-2. Kies **Plugins → Plugins Folder**. Studio opent dan de pluginmap van déze installatie.
-3. Kopieer vanuit je repo alleen `plugin/RobloxGitBridge.plugin.lua` naar die map. Laat de bestandsnaam eindigen op `.plugin.lua`; controleer op Windows dat hij niet per ongeluk `RobloxGitBridge.plugin.lua.txt` heet.
-4. Sluit Roblox Studio helemaal af en open het opnieuw.
-5. Kijk op de **Plugins**-toolbar naar **Roblox Git Bridge**. Klik erop om het pluginvenster te openen.
+2. Kies **Plugins → Plugins Folder**. Studio opent de juiste pluginmap.
+3. Kopieer vanuit de lokale repo `plugin/RobloxGitBridge.plugin.lua` naar die map. De naam moet eindigen op `.plugin.lua`, niet `.plugin.lua.txt`.
+4. Sluit Roblox Studio volledig af en open het opnieuw.
+5. Klik op **Roblox Git Bridge** in de Plugins-toolbar.
 
-De pluginmap is niet de Explorer van je spel. Je installeert het gereedschap voor Studio, niet een object in je place.
+Als je de plugin al eerder had geïnstalleerd, vervang dan het oude bestand door deze bijgewerkte versie en herstart Studio.
 
 ## 3. Start de lokale bridge
 
-1. Open een terminal in de repo-hoofdmap — dezelfde map waar `package.json` staat.
-2. Voer uit:
+1. Installeer Node.js 18 of hoger.
+2. Open een terminal in de repo-hoofdmap — waar `package.json` staat — en voer uit:
 
    ```sh
    npm start
    ```
 
-   Er is geen `npm install` nodig; deze bridge gebruikt alleen Node.js zelf. Je hebt Node.js versie 18 of hoger nodig.
-3. Laat de terminal open. Je ziet ongeveer:
+3. Laat de terminal open. De bridge toont een tijdelijke token en meldt of Auto Git aanstaat. De standaardinstelling is aan.
+4. Als `npm` niet wordt herkend, installeer Node.js en open daarna een nieuwe terminal.
 
-   ```text
-   Roblox Studio Git Bridge listening at http://127.0.0.1:47831
-   Bridge token (paste into the Studio plugin; do not share): ...
-   ```
+De bridge verwacht dat de lokale Git-branch `arena/777e60cb-roblox` heet en dat GitHub-authenticatie al via Git op je computer werkt. De plugin heeft geen GitHub-wachtwoord of GitHub-token nodig.
 
-   Kopieer de token uit jouw terminal. Gebruik niet de voorbeeldtekst hierboven. Deel de token niet. Als je de bridge stopt en opnieuw start, wordt er standaard een nieuwe token gemaakt.
+## 4. Verbind en controleer de automatische knoppen
 
-## 4. Verbind de plugin
+1. Laat de URL staan op `http://127.0.0.1:47831`.
+2. Plak de token uit de huidige terminal in het tokenveld.
+3. Klik **Opslaan + testverbinding**.
+4. Controleer dat de knoppen **Automatische wereldsync: AAN** en **AI-patches automatisch toepassen: AAN** tonen. Je kunt op elk van die knoppen klikken om die functie uit te zetten.
+5. Als Studio toestemming vraagt om met de lokale bridge te verbinden, sta die lokale verbinding toe.
 
-1. Laat de URL in de plugin staan op `http://127.0.0.1:47831`.
-2. Plak de token in het tokenveld.
-3. Klik op **Opslaan + testverbinding**.
-4. Als Studio een netwerktoestemming vraagt, sta dan alleen de verbinding met deze lokale bridge toe. De plugin hoort niet naar een openbare server te wijzen.
+De token verandert normaal wanneer je de bridge stopt en opnieuw start. Gebruik dan de nieuwe token.
 
-Als je geen verbinding krijgt: controleer dat `npm start` nog draait en dat je de token van de huidige sessie hebt gekopieerd. Zie ook [Problemen oplossen](#problemen-oplossen).
+## 5. Wat gebeurt er automatisch?
 
-## 5. Een eerste veilige test
+### Studio → repo → GitHub
 
-Doe dit eerst op een nieuwe/test-place of maak een reservekopie van je place.
+De plugin volgt wijzigingen in Workspace en belangrijke game-services, waaronder ReplicatedStorage, ServerScriptService, ServerStorage, StarterGui en StarterPlayer. Als er ongeveer drie seconden geen nieuwe wijziging is, exporteert hij die services naar `studio/snapshots/latest.json`.
 
-1. Open de place die je wilt testen.
-2. Start `npm start` en verbind de plugin.
-3. Kopieer in de repo `studio/changes/latest.example.json` en noem de kopie `studio/changes/latest.json`.
-   - In Verkenner/Finder: kopieer het bestand en hernoem de kopie.
-   - In PowerShell, vanuit de repo-hoofdmap:
+De bridge haalt zo nodig nieuwe commits op met fast-forward-only, stage’t met `git add -A`, maakt een commit en pusht naar `origin arena/777e60cb-roblox`. Hij doet dat alleen als er daadwerkelijk repo-wijzigingen zijn. Dit kan dus **ook andere gewijzigde repo-bestanden** meenemen, niet alleen de snapshot.
 
-     ```powershell
-     Copy-Item studio/changes/latest.example.json studio/changes/latest.json
-     ```
+Als de lokale branch verkeerd staat, de lokale en remote branches uiteenlopen of een remote update botst met on-gecommitte lokale wijzigingen, stopt de bridge en meldt hij dat. Hij force-pusht niet. De lokale snapshot kan dan wel opgeslagen zijn; corrigeer de branch/status en probeer daarna opnieuw.
 
-   - In macOS/Linux-terminal:
+### GitHub → Studio
 
-     ```sh
-     cp studio/changes/latest.example.json studio/changes/latest.json
-     ```
-4. Klik in de plugin op **Wijzigingen bekijken**. De patch hoort aan te geven dat er een `StarterObby`-model met een basis, platform, startpunt en lamp wordt toegevoegd.
-5. Alleen als je het goed vindt: klik op **Voorbeeld toepassen**.
-6. Kijk in de Explorer onder `Workspace`. Als je tevreden bent, sla de place zelf op via Studio. De plugin publiceert je place niet automatisch.
+De plugin controleert ongeveer iedere acht seconden op een nieuwe `studio/changes/latest.json`-patch. De bridge haalt de werkbranch fast-forward-only op. Bij een nieuwe patch-id past de plugin de operaties automatisch toe, zonder preview: objecten maken, properties wijzigen, scriptbroncode bijwerken en objecten verwijderen.
 
-Het JSON-bestand zelf wordt niet in Studio ingevoegd. De plugin leest dat bestand via de bridge en maakt de beschreven objecten in de open place.
+Gebruik voor iedere patch een **nieuwe id**. De plugin voorkomt dat dezelfde id opnieuw wordt toegepast. De knoppen **Wijzigingen bekijken** en **Voorbeeld toepassen** blijven beschikbaar; zet automatisch toepassen uit als je elke patch eerst wilt controleren.
 
-## 6. Je eigen wereld bekijken of wijzigingen toepassen
+> Automatisch toepassen verandert de place zonder bevestigingsklik. Scriptbroncode wordt niet met `loadstring` uitgevoerd, maar scripts kunnen wel gaan draaien wanneer de game start. Test op een kopie en sla je place zelf op in Studio. De plugin maakt undo-waypoints, maar vertrouw niet alleen op Undo.
 
-### Een beschrijving van de wereld exporteren
+## 6. Veilige test-obby (optioneel)
 
-- **Workspace exporteren** neemt de Workspace-hiërarchie mee. Een grote wereld kan de limiet bereiken; exporteer dan liever een kleinere selectie.
-- Voor een kleiner deel: selecteer een Model of objecten in de Explorer/wereld en klik op **Selectie exporteren**.
-- De export wordt lokaal aangemaakt als `studio/snapshots/latest.json`. Een nieuwe export vervangt dit `latest`-bestand.
-- Met **Scripts: AAN** gaat leesbare broncode van scripts mee; met **Scripts: UIT** worden scriptbronnen overgeslagen.
+Doe dit op een test-place of een reservekopie.
 
-De snapshot is bedoeld om de structuur en ondersteunde eigenschappen te bekijken. Het is geen screenshot en ook geen volledige `.rbxl`-back-up.
+1. Zet **AI-patches automatisch toepassen** tijdelijk uit als je eerst zelf wilt kijken.
+2. Kopieer `studio/changes/latest.example.json` naar `studio/changes/latest.json`.
+   - PowerShell vanuit de repo-hoofdmap: `Copy-Item studio/changes/latest.example.json studio/changes/latest.json`
+   - macOS/Linux: `cp studio/changes/latest.example.json studio/changes/latest.json`
+3. Met auto-apply uit: klik **Wijzigingen bekijken** en daarna eventueel **Voorbeeld toepassen**. Met auto-apply aan wordt de StarterObby-patch vanzelf toegepast zodra de lokale repo de nieuwe patch bevat.
+4. Kijk in de Explorer onder Workspace en sla de test-place zelf op als je het resultaat wilt bewaren.
 
-### Een wijziging laten maken
+## Bestanden die je niet in Studio hoeft te plaatsen
 
-Vraag de assistent om een wijziging aan `studio/changes/latest.json` te maken. Zorg dat het bijgewerkte bestand in dezelfde lokale repo staat als de bridge. Klik in Studio op **Wijzigingen bekijken**, lees de samenvatting en klik daarna pas op **Voorbeeld toepassen**.
+| Pad | Betekenis |
+|---|---|
+| `bridge/server.mjs`, `bridge/protocol.mjs` | Lokale Node-server en validatie. |
+| `package.json` | Start- en testcommando's. |
+| `studio/changes/latest.json` | Patch die de plugin leest; geen Roblox-script. |
+| `studio/changes/latest.example.json` | Kopieerbaar voorbeeld. |
+| `studio/snapshots/latest.json` | Snapshot; geen Roblox-place of screenshot. |
+| `studio/FORMAT.md` | Uitleg van het JSON-formaat. |
+| `GAME_DESIGN.md` | Gameconcept en prototypeplan. |
 
-De plugin past expliciete bouw- en scriptwijzigingen toe. Hij gebruikt geen `loadstring` om willekeurige code uit te voeren. Wel kan een Script dat is aangepast later door Roblox worden uitgevoerd wanneer je de game start, dus controleer scriptcode eerst. Als een patch halverwege een fout krijgt, kunnen eerdere operaties al zijn toegepast; maak daarom vooraf een place-kopie en gebruik zo nodig Studio-undo (`Ctrl+Z`).
+## Automatisch Git uitzetten
 
-## Welke repo-bestanden zijn voor Roblox?
+In de plugin kun je automatische wereldsync uitzetten; daarmee stopt automatisch exporteren vanuit Studio. Om automatisch ophalen/committen/pushen in de lokale bridge uit te zetten, stop `npm start` met `Ctrl+C` en start hem opnieuw met:
 
-| Pad | Rol | In Roblox zetten? |
-|---|---|---|
-| `plugin/RobloxGitBridge.plugin.lua` | De lokale Studio-plugin. | **Ja**, in de Studio-pluginmap. |
-| `bridge/server.mjs` en `bridge/protocol.mjs` | De lokale HTTP-server en validatie. | Nee; Node.js draait deze op je computer. |
-| `package.json` | Bevat het commando `npm start` en `npm test`. | Nee. |
-| `studio/changes/latest.json` | De patch die de plugin kan bekijken/toepassen. | Nee; de plugin leest hem uit de repo. |
-| `studio/changes/latest.example.json` | Een testpatch om mee te beginnen. | Nee; kopieer hem eerst naar `latest.json`. |
-| `studio/snapshots/latest.json` | Wereldbeschrijving die door exporteren wordt aangemaakt. | Nee; deze gaat in de repo, niet in je place. |
-| `studio/FORMAT.md` | Uitleg van de JSON-formaten. | Nee. |
-| `GAME_DESIGN.md` | De gamevisie en prototypeplanning. | Nee. |
+PowerShell:
 
-## GitHub en Git
+```powershell
+$env:STUDIO_AUTO_GIT="0"
+npm start
+```
 
-De plugin schrijft alleen naar de lokale checkout. Om een snapshot op GitHub te krijgen, moet je die zelf met Git committen en naar jouw werkbranch pushen. Om een patch die op GitHub staat lokaal te kunnen toepassen, moet je die eerst in je lokale checkout ophalen. De bridge commit, pusht, merge’t of publiceert niets en maakt geen PR.
+macOS/Linux:
+
+```sh
+STUDIO_AUTO_GIT=0 npm start
+```
+
+Met Auto Git uit blijven lokale snapshots en patches werken, maar de bridge haalt niet automatisch van GitHub op en pusht niets.
 
 ## Problemen oplossen
 
-- **Plugin staat niet in Studio:** controleer via **Plugins → Plugins Folder** dat je het bestand in de juiste map hebt gezet; controleer de extensie `.plugin.lua`; herstart Studio.
-- **Verbinding geweigerd / timeout:** controleer dat `npm start` nog draait en dat de plugin-URL exact `http://127.0.0.1:47831` is.
-- **HTTP 401 / tokenfout:** kopieer de token opnieuw uit de lopende terminal en druk op **Opslaan + testverbinding**.
-- **HTTP 404 bij wijzigingen bekijken:** `studio/changes/latest.json` bestaat nog niet. Kopieer eerst het voorbeeldbestand of laat een patch maken.
-- **Export niet zichtbaar op GitHub:** export schrijft eerst lokaal naar `studio/snapshots/latest.json`; gebruik daarna zelf Git om het bestand te committen en te pushen.
-- **Studio weigert HTTP:** controleer de melding/toestemming van Studio. De plugin is bedoeld voor de lokale bridge op `127.0.0.1`, niet voor een publiek adres.
+- **Plugin ontbreekt:** controleer dat het bestand in de map van **Plugins → Plugins Folder** staat, eindigt op `.plugin.lua`, en herstart Studio.
+- **Verbinding geweigerd:** controleer dat `npm start` nog draait en de URL `http://127.0.0.1:47831` is.
+- **HTTP 401:** plak de token uit de huidige bridge-terminal opnieuw.
+- **Branch-melding:** voer `git status --short` en `git branch --show-current` uit in de repo. Auto Git pusht alleen `arena/777e60cb-roblox`; bij afwijkende of uiteenlopende branches stopt hij.
+- **Auto-push mislukt:** controleer de statusmelding in de plugin en dat Git op je computer toegang heeft tot de repo. De bridge force-pusht nooit.
+- **Patch komt niet in Studio:** controleer of auto-apply aanstaat, of de patch in `studio/changes/latest.json` staat en of de patch-id nieuw is.
+- **Snapshot lijkt niet volledig:** auto-sync volgt de opgesomde services, maar is geen volledige `.rbxl`-export; Terrain-voxels en exacte geïmporteerde mesh-geometrie worden niet meegenomen.
