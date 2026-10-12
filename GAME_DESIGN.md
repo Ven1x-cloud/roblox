@@ -14,8 +14,8 @@ Een spannende survival-avonturengame met een verhaal en een lichte tycoonlaag. D
 - De waarheid: de speler en vrienden waren professoren die vreemde verschijnselen in de oceaan onderzochten. Na een doorbraak kwam een glitch in de wereld vrij. De groep ontsnapte, maar werd gehersenspoeld en weet niet meer wat er is gebeurd.
 - Verderop zijn drie andere professoren te vinden. Ze waren ziek en hielden zich schuil toen ze merkten dat er iets mis was; zij onthullen een groot deel van het verleden.
 - Naarmate de speler verder komt, trekt de stormgrens terug en worden nieuwe delen van de kaart bereikbaar.
-- Er volgt een boss fight. De glitch kan niet definitief worden verslagen, maar wel verzwakt. Daarna gaat de survival-game eindeloos verder.
-- Na de boss fight staat Memories eerst op 100%. Daarna schuift/verkleint die meter om ruimte te maken voor een tweede paarse meter met het opschrift `???`. De functie daarvan blijft geheim voor een latere update.
+- De boss fight is het einde van het verhaalhoofdstuk, niet het einde van de game. De glitch kan niet definitief worden verslagen, maar wel verzwakt; daarna speel je door in endless survival, zoals bij een game die na de campaign doorloopt.
+- De boss fight geeft loot/een beloning. De grote, opvallende langetermijnbeloning is de nieuwe paarse meter: Memories bereikt eerst 100%, schuift/verkleint daarna en maakt plaats voor een tweede meter met `???`. Die meter is echt bedoeld als post-boss progression/reward, maar de precieze functie blijft voor spelers nog geheim.
 
 ## Gameplay-lus
 
@@ -58,7 +58,7 @@ Later zijn bediening voor mobiel/controller en toegankelijkheidsinstellingen nod
 - Een kaart-GUI toont andere spelers, behalve spelers die in de storm zitten.
 - Een altijd zichtbare tijd-GUI toont tijd en dag/nacht.
 - Een Memories-balk toont voortgang in het verhaal.
-- Een klein glitch-fragment is onderdeel van de speler en kan soms helpen. Voorbeelden zijn een boot die 20% sneller gaat na een bepaalde tekst in de chat, of een schild voor vijf seconden plus 20% healing. Dit moet later zorgvuldig worden uitgewerkt.
+- Een klein glitch-fragment is onderdeel van de speler en kan soms helpen. De chatkrachten moeten juist onverwacht en grappig zijn om toevallig te ontdekken; er komt geen expliciete tutorial die de geheime zinnen verklapt. Voorbeelden: `why is this so slow?` kan de boot 20% sneller maken en `help meeee` kan een schild voor vijf seconden plus 20% healing geven. Er komt wel een cooldown, maar het blijft een geheim/easter egg en geen gewone knop in het abilities-menu. De chattekst wordt alleen gebruikt om zo'n toegestane trigger te herkennen, niet om gesprekken op te slaan.
 
 ## Voorstel voor de eerste speelbare prototype
 
