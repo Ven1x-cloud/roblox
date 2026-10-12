@@ -29,12 +29,28 @@ Een spannende survival-avonturengame met een verhaal en een lichte tycoonlaag. D
 
 Voortgang moet opgeslagen kunnen worden, zodat spelers later met hun ontgrendelde spullen, starter kit en boot verdergaan.
 
-## Lobby en upgrades
+## Lobby, parties en sessies
 
-- Boten om uit te kiezen.
-- Robux-passes.
-- Starter packs die niet met Robux gekocht hoeven te worden en waarmee de speler met gekozen startspullen kan beginnen.
+- De lobby is een veilige haven/hub buiten de survival-sessie. Spelers kunnen er hun groep vormen, een boot kiezen en vertrekken zonder dat ze daar aangevallen worden.
+- De party-leider nodigt vrienden uit. De groep kiest een beschikbare boot en eventueel een starter pack; iedereen ziet wie klaarstaat. Partygrootte en matchmakingregels zijn nog niet gekozen.
+- Bij **Start expeditie** stuurt Roblox de hele party met `TeleportService` naar één **reserved server** (gereserveerde server): een privésessie voor die groep, zonder dat iemand een betaald Roblox-privéserverabonnement nodig heeft. De server maakt later één willekeurige wereldseed aan; alle spelers van die party krijgen dezelfde eilanden en wereld.
+- Een nieuwe expeditie kan een nieuwe seed krijgen. Als spelers later hun bestaande expeditie moeten kunnen hervatten, bewaren we ook de seed en voortgang. Dit ontwerpen we samen met de random map generator; het wordt nog niet gebouwd.
+- Eerste lobby-indeling: centrale spawn en vertreksteiger; party-/starttafel; botenshowroom en gewone shop; VIP-boot/pass-presentatie; starter-packkeuze; en een klein veilig testwater voor boten en turrets. De party-/serverstart blijft gratis, zodat passes vrienden niet van samen spelen uitsluiten.
+- De lobby mag alvast de sfeer van een oceaan-onderzoeksstation krijgen, met een kaart en hints naar de **Berumida-driehoek**. Het is een veilige plek, geen tweede survival-level.
 - De tycoonlaag blijft in eerste instantie beperkt tot upgrades voor de basis en de boot.
+
+## Gamepass-concept: VIP-boot
+
+Een permanente Roblox Game Pass geeft toegang tot een speciale VIP-boot die niet met gewone in-game munten te koop is. De genoemde eigenschappen zijn het eerste ontwerp; de exacte cijfers en balans testen we later:
+
+- Topsnelheid: **2× de snelste boot die normaal in de shop te koop is**.
+- Een schild met een vaste hoeveelheid shield-HP vangt schade op voordat de boot/bemanning gewone schade krijgt. Het schild vernieuwt na elke **10 dagen**; we moeten nog bepalen of dat in-game dagen of echte dagen zijn.
+- Twee gewone turrets die een speler kan bemannen; als niemand ze bedient, richt en schiet een eenvoudige bot alleen op vijanden.
+- Een sterkere turret die alleen de bestuurder kan bedienen.
+- Een werkende dansvloer die de avatar laat dansen.
+- Langeafstands-sonar: toont eilandmarkeringen buiten de gewone renderafstand en geeft alleen een categorie, geen precieze loot: `???`, `Food`, `Materials`, `Money` of `Utility`. `???` blijft mysterieus en verraadt geen verhaalinhoud.
+
+**Balanspunt om te testen:** twee keer zo snel, schild, drie turrets en sonar samen maken VIP erg krachtig en kunnen betaalde spelers veel verhaal/gevaar laten overslaan. We houden het als jouw gewenste VIP-concept bij, maar testen de 2× snelheid, turrets, schade en sonar in een proefversie vóór we de pass verkopen. De gewone route, het verhaal en samen een party starten blijven speelbaar zonder Robux. Andere passes kunnen later vooral cosmetisch zijn, zoals boot-skins, vlaggen, outfits en emotes.
 
 ## Besturing (eerste ontwerp, toetsenbord)
 
@@ -65,20 +81,25 @@ Later zijn bediening voor mobiel/controller en toegankelijkheidsinstellingen nod
 
 Begin klein; bouw nog niet meteen het hele verhaal of de boss fight:
 
-1. Eén start-eiland met spawn, het latere basishuisje en een veilige kust.
-2. Een simpele dag/nacht- en tijd-GUI.
-3. Eén bestuurbare boot en één dichtbijgelegen loot-eiland.
-4. Een eenvoudige terugkeer naar de basis met één zichtbare upgrade.
-5. Een veilige stormgrens die de minimap-spelers verbergt en een eerste verhaalhint.
-6. Opslaan/herladen van basisvoortgang zodra de kernlus werkt.
+1. Een lobby-greybox: veilige spawn, vertreksteiger, plek voor party-/bootkeuze en eenvoudige presentaties van shop en VIP-boot. In deze stap zijn de partyknoppen, Robux-aankopen en teleport nog niet actief.
+2. Eén start-eiland met het latere basishuisje en een veilige kust.
+3. Een simpele dag/nacht- en tijd-GUI.
+4. Eén bestuurbare boot en één dichtbijgelegen loot-eiland.
+5. Een eenvoudige terugkeer naar de basis met één zichtbare upgrade.
+6. Een veilige stormgrens die de minimap-spelers verbergt en een eerste verhaalhint.
+7. Opslaan/herladen van basisvoortgang zodra de kernlus werkt.
 
-Daarna pas uitbreiden met survivalmeters, de drie professoren, de storm-monster, speciale bewegingen, lobby-economie en de boss/endless-modus. Zo kunnen de basis, boot en varen eerst speelbaar en leuk worden voordat de complexere systemen worden toegevoegd.
+Daarna pas uitbreiden met random generatie en reserved servers, survivalmeters, de drie professoren, de storm-monster, speciale bewegingen, lobby-economie en de boss/endless-modus. Zo kunnen we eerst het uiterlijk en de flow van de lobby kiezen, en daarna de basis, boot en varen speelbaar maken voordat de complexere systemen worden toegevoegd.
 
 ## Nog niet vastgelegd
 
-- Titel, doelgroep, groepsgrootte en sessieduur.
+- Titel, doelgroep, maximale partygrootte, uitnodigen/joinen en sessieduur.
+- Hoe lobby-/party-UI en de vertrekflow er precies uitzien.
 - Hoe lang een dag/nacht duurt en welke resources de basis-upgrades nodig hebben.
+- Of het VIP-schild na 10 in-game dagen of na 10 echte dagen vernieuwt, hoeveel shield-HP het heeft en hoe de bot-turrets mikken.
+- Of 2× VIP-snelheid met sturen, brandstof, schade en latere shopboten goed in balans blijft; testen vóór verkoop.
+- Welke starter packs gratis/verdienbaar zijn en welke eventuele cosmetische passes later komen.
+- Hoe de random world seed, opnieuw verbinden en voortgang per party worden opgeslagen.
 - Namen, uiterlijk en gedrag van het monster en de drie professoren.
-- Welke starter packs gratis/verdienbaar zijn en wat passes precies doen.
 - Hoe stormteleport, glitchespreuken en de tweede `???`-meter precies werken.
 - De precieze val-schadedrempel, adem/waterregels en wall-walk balans.
