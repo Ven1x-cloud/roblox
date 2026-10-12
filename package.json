@@ -1,0 +1,14 @@
+{
+  "name": "roblox-github-studio-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local, token-protected bridge between a Roblox Studio plugin and this Git repository.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node bridge/server.mjs",
+    "test": "node --test"
+  }
+}
