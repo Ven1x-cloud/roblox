@@ -44,7 +44,7 @@ Voortgang moet opgeslagen kunnen worden, zodat spelers later met hun ontgrendeld
 
 ## Speldag en campagneduur
 
-- Eerste testdoel: één volledige in-game dag/nachtcyclus duurt **3 minuten echte speeltijd**. Dit is een instelbare prototypewaarde, geen definitieve regel; we moeten kijken of dagtaken en nachten dan niet te gehaast voelen.
+- Eerste testdoel: één volledige in-game dag/nachtcyclus duurt **3 minuten echte speeltijd**. De eerste prototypeverdeling is **2 minuten daglicht en 1 minuut nacht**. Beide waarden zijn instelbaar; we passen ze aan als dagtaken of nachten te gehaast voelen.
 - Bij dat tempo duren 10 actieve in-game dagen ongeveer 30 minuten. Als het VIP-schild inderdaad na 10 in-game dagen ververst, vernieuwt het tijdens een actieve sessie dus ongeveer elk halfuur; de klok loopt niet door wanneer de wereld offline is. Dit is nog een voorstel om te bevestigen.
 - De boss verslaan is het einde van het verhaalhoofdstuk, niet van het spel: daarna begint endless survival. De totale campagneduur bepalen we met doelen/voortgang en niet alleen met de dagklok; de 3-minutencyclus kunnen we tijdens tests bijstellen.
 
@@ -65,7 +65,7 @@ Een permanente Roblox Game Pass geeft toegang tot een speciale VIP-boot (niet me
 
 - Bewegingssnelheid als doel: **30 studs per seconde** en een dubbele sprong. We moeten nog bepalen of 30 studs/s de normale snelheid of alleen sprint is.
 - Een gewone bandage herstelt **50% van de maximale health**, zonder boven de normale health uit te komen.
-- Een mutant bandage healt niet. Het kan worden ingezet om een neergehaalde teamgenoot een tweede kans te geven, of vooraf op jezelf worden gebruikt als een eenmalige `Totem of Undying`-achtige bescherming. Werkinterpretatie om te testen: **30 seconden gebruiken/opladen** om hem te activeren; daarna redt hij de drager één keer van een dodelijke klap of revive't hij een teamgenoot. De exacte health na de revive en het verbruik moeten nog worden bepaald.
+- Een mutant bandage healt niet. Beide toepassingen duren **30 seconden**: op een neergehaalde teamgenoot gebruiken om die te reviven, óf op jezelf gebruiken om een eenmalige `Totem of Undying`-achtige bescherming te activeren die je bij één dodelijke klap redt. De exacte health na de revive, onderbrekingen en het verbruik moeten nog worden bepaald.
 - De kit bevat later de overige items die jij nog kiest. We bepalen ook nog of hij eenmaal per nieuwe expeditie wordt uitgedeeld en hoe hij bij opslaan/herjoin werkt; hij mag niet opnieuw worden uitgedeeld bij iedere serverjoin.
 
 **Balanspunt om te testen:** 2× bootsnelheid, schild, drie turrets, sonar, 30 studs/s, dubbele sprong en een extra leven samen maken VIP erg krachtig. We bewaren jouw concept, maar testen snelheid, sonar en overlevingsvoordeel vóór verkoop. De gewone route, het verhaal en samen een party starten blijven speelbaar zonder Robux. Dubbele sprong krijgt een eigen invoerregel zodat die niet botst met wall-walk/dak-klimmen. Andere passes kunnen later vooral cosmetisch zijn, zoals boot-skins, vlaggen, outfits en emotes.
@@ -113,10 +113,10 @@ Daarna pas uitbreiden met random generatie en reserved servers, survivalmeters, 
 
 - Titel, doelgroep, invite-/join-UI en sessieduur. De afgesproken startparty is maximaal 5 en een opgeslagen wereld maximaal 10 spelers tegelijk.
 - Hoe lobby-/party-UI en de vertrekflow er precies uitzien.
-- Hoe de 3-minutencyclus over dag en nacht verdeeld wordt en welke resources de basis-upgrades nodig hebben.
+- Of de eerste verdeling van 2 minuten daglicht en 1 minuut nacht prettig speelt, en welke resources de basis-upgrades nodig hebben.
 - Of het VIP-schild na 10 in-game dagen of 10 echte dagen ververst, hoeveel shield-HP het heeft en hoe de bot-turrets mikken.
 - Of VIP-bewegingssnelheid van 30 studs/s altijd geldt of alleen bij sprint, en of 2× bootsnelheid goed in balans blijft; testen vóór verkoop.
-- Hoe de mutant bandage precies oplaadt, hoeveel health een revive geeft, wanneer hij wordt verbruikt en hoe de VIP-starter kit bij nieuwe expedities/herjoin wordt uitgedeeld.
+- Hoe de mutant bandage-interacties worden onderbroken, hoeveel health een revive geeft, wanneer hij wordt verbruikt en hoe de VIP-starter kit bij nieuwe expedities/herjoin wordt uitgedeeld. Beide interacties duren voorlopig 30 seconden.
 - Welke starter packs gratis/verdienbaar zijn en welke eventuele cosmetische passes later komen.
 - Hoe de random world seed, opnieuw verbinden, Pro-owner/Owner-rechten en voortgang per party worden opgeslagen.
 - Namen, uiterlijk en gedrag van het monster en de drie professoren.

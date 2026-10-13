@@ -1,0 +1,2405 @@
+{
+  "schemaVersion": 1,
+  "id": "berumida-lobby-prototype-v1",
+  "summary": "Bouw een veilige Berumida-havenlobby, verplaats de spawn en voeg de prototypeklok en status-HUD toe. Party, saves en teleport zijn nog placeholders.",
+  "operations": [
+    {
+      "op": "set",
+      "path": [
+        {
+          "name": "Workspace",
+          "className": "Workspace",
+          "ordinal": 1
+        },
+        {
+          "name": "Baseplate",
+          "className": "Part",
+          "ordinal": 1
+        }
+      ],
+      "properties": {
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "op": "set",
+      "path": [
+        {
+          "name": "Workspace",
+          "className": "Workspace",
+          "ordinal": 1
+        },
+        {
+          "name": "Baseplate",
+          "className": "Part",
+          "ordinal": 1
+        },
+        {
+          "name": "Texture",
+          "className": "Texture",
+          "ordinal": 1
+        }
+      ],
+      "properties": {
+        "Transparency": 1
+      }
+    },
+    {
+      "op": "set",
+      "path": [
+        {
+          "name": "Workspace",
+          "className": "Workspace",
+          "ordinal": 1
+        },
+        {
+          "name": "SpawnLocation",
+          "className": "SpawnLocation",
+          "ordinal": 1
+        }
+      ],
+      "properties": {
+        "Position": [
+          0,
+          3,
+          43
+        ],
+        "Size": [
+          12,
+          1,
+          12
+        ],
+        "Color": [
+          0.12,
+          0.7,
+          0.64
+        ],
+        "Material": "Neon"
+      }
+    },
+    {
+      "op": "set",
+      "path": [
+        {
+          "name": "Workspace",
+          "className": "Workspace",
+          "ordinal": 1
+        },
+        {
+          "name": "SpawnLocation",
+          "className": "SpawnLocation",
+          "ordinal": 1
+        },
+        {
+          "name": "Decal",
+          "className": "Decal",
+          "ordinal": 1
+        }
+      ],
+      "properties": {
+        "Transparency": 1
+      }
+    },
+    {
+      "op": "create",
+      "parent": [
+        {
+          "name": "Workspace",
+          "className": "Workspace",
+          "ordinal": 1
+        }
+      ],
+      "node": {
+        "name": "BerumidaLobbyPrototype",
+        "className": "Model",
+        "properties": {},
+        "children": [
+          {
+            "name": "Ocean",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "LobbyWater",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    520,
+                    0.2,
+                    520
+                  ],
+                  "Position": [
+                    0,
+                    0.11,
+                    0
+                  ],
+                  "Color": [
+                    0.025,
+                    0.18,
+                    0.29
+                  ],
+                  "Material": "Glass",
+                  "Transparency": 0.18
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Island",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "IslandFoundation",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    142,
+                    2,
+                    122
+                  ],
+                  "Position": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "Color": [
+                    0.66,
+                    0.54,
+                    0.36
+                  ],
+                  "Material": "Sand",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StoneWalkway",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    94,
+                    0.22,
+                    76
+                  ],
+                  "Position": [
+                    0,
+                    2.08,
+                    1
+                  ],
+                  "Color": [
+                    0.23,
+                    0.3,
+                    0.34
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SpawnPlaza",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    46,
+                    0.28,
+                    25
+                  ],
+                  "Position": [
+                    0,
+                    2.18,
+                    43
+                  ],
+                  "Color": [
+                    0.2,
+                    0.34,
+                    0.37
+                  ],
+                  "Material": "Concrete",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SpawnPath",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    0.22,
+                    17
+                  ],
+                  "Position": [
+                    0,
+                    2.19,
+                    32
+                  ],
+                  "Color": [
+                    0.34,
+                    0.41,
+                    0.42
+                  ],
+                  "Material": "Concrete",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "CentralInlay",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    52,
+                    0.08,
+                    2
+                  ],
+                  "Position": [
+                    0,
+                    2.23,
+                    -1
+                  ],
+                  "Color": [
+                    0.1,
+                    0.57,
+                    0.59
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "DockApproach",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    0.25,
+                    18
+                  ],
+                  "Position": [
+                    0,
+                    2.2,
+                    -48
+                  ],
+                  "Color": [
+                    0.3,
+                    0.23,
+                    0.15
+                  ],
+                  "Material": "WoodPlanks",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "ResearchStation",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "StationFloor",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    60,
+                    1.6,
+                    44
+                  ],
+                  "Position": [
+                    0,
+                    2.95,
+                    8
+                  ],
+                  "Color": [
+                    0.16,
+                    0.23,
+                    0.28
+                  ],
+                  "Material": "Concrete",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationBackWall",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    60,
+                    14,
+                    2
+                  ],
+                  "Position": [
+                    0,
+                    10.1,
+                    -14
+                  ],
+                  "Color": [
+                    0.055,
+                    0.12,
+                    0.18
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationLeftWall",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2,
+                    14,
+                    44
+                  ],
+                  "Position": [
+                    -29,
+                    10.1,
+                    8
+                  ],
+                  "Color": [
+                    0.065,
+                    0.15,
+                    0.2
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationRightWall",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2,
+                    14,
+                    44
+                  ],
+                  "Position": [
+                    29,
+                    10.1,
+                    8
+                  ],
+                  "Color": [
+                    0.065,
+                    0.15,
+                    0.2
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationFrontLeftWall",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    12,
+                    2
+                  ],
+                  "Position": [
+                    -21,
+                    9.2,
+                    30
+                  ],
+                  "Color": [
+                    0.065,
+                    0.15,
+                    0.2
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationFrontRightWall",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    12,
+                    2
+                  ],
+                  "Position": [
+                    21,
+                    9.2,
+                    30
+                  ],
+                  "Color": [
+                    0.065,
+                    0.15,
+                    0.2
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationRoof",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    66,
+                    2,
+                    50
+                  ],
+                  "Position": [
+                    0,
+                    18.1,
+                    8
+                  ],
+                  "Color": [
+                    0.045,
+                    0.1,
+                    0.15
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationRoofAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    42,
+                    0.55,
+                    1
+                  ],
+                  "Position": [
+                    0,
+                    19.35,
+                    33
+                  ],
+                  "Color": [
+                    0.1,
+                    0.73,
+                    0.68
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationDoorPillarLeft",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2,
+                    9,
+                    2
+                  ],
+                  "Position": [
+                    -11,
+                    7.8,
+                    30
+                  ],
+                  "Color": [
+                    0.76,
+                    0.57,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "StationDoorPillarRight",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2,
+                    9,
+                    2
+                  ],
+                  "Position": [
+                    11,
+                    7.8,
+                    30
+                  ],
+                  "Color": [
+                    0.76,
+                    0.57,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "WindowLeft",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    0.22,
+                    6,
+                    13
+                  ],
+                  "Position": [
+                    -27.85,
+                    11,
+                    9
+                  ],
+                  "Color": [
+                    0.11,
+                    0.58,
+                    0.68
+                  ],
+                  "Material": "Glass",
+                  "Transparency": 0.28
+                },
+                "children": []
+              },
+              {
+                "name": "WindowRight",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    0.22,
+                    6,
+                    13
+                  ],
+                  "Position": [
+                    27.85,
+                    11,
+                    9
+                  ],
+                  "Color": [
+                    0.11,
+                    0.58,
+                    0.68
+                  ],
+                  "Material": "Glass",
+                  "Transparency": 0.28
+                },
+                "children": []
+              },
+              {
+                "name": "ResearchMapBoardPanel",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    20,
+                    11,
+                    0.8
+                  ],
+                  "Position": [
+                    0,
+                    9,
+                    -12.7
+                  ],
+                  "Color": [
+                    0.035,
+                    0.09,
+                    0.13
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "ResearchMapBoardAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    20,
+                    0.7,
+                    1
+                  ],
+                  "Position": [
+                    0,
+                    14.5,
+                    -12.6
+                  ],
+                  "Color": [
+                    0.1,
+                    0.73,
+                    0.68
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "StarterKitTable",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    1,
+                    6
+                  ],
+                  "Position": [
+                    0,
+                    4.3,
+                    7
+                  ],
+                  "Color": [
+                    0.38,
+                    0.25,
+                    0.15
+                  ],
+                  "Material": "WoodPlanks",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "BandageDisplay",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2.2,
+                    1.8,
+                    2.2
+                  ],
+                  "Position": [
+                    -4,
+                    5.65,
+                    7
+                  ],
+                  "Color": [
+                    0.86,
+                    0.88,
+                    0.78
+                  ],
+                  "Material": "SmoothPlastic",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MutantBandageDisplay",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    2.2,
+                    1.8,
+                    2.2
+                  ],
+                  "Position": [
+                    4,
+                    5.65,
+                    7
+                  ],
+                  "Color": [
+                    0.47,
+                    0.25,
+                    0.83
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "PartyArea",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "PartyPlaza",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    28,
+                    0.35,
+                    28
+                  ],
+                  "Position": [
+                    -45,
+                    2.15,
+                    19
+                  ],
+                  "Color": [
+                    0.19,
+                    0.27,
+                    0.31
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "PartyBoardPanel",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    10,
+                    1
+                  ],
+                  "Position": [
+                    -45,
+                    7.5,
+                    9
+                  ],
+                  "Color": [
+                    0.035,
+                    0.09,
+                    0.13
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "PartyBoardAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    18,
+                    0.65,
+                    1.1
+                  ],
+                  "Position": [
+                    -45,
+                    12.55,
+                    9
+                  ],
+                  "Color": [
+                    0.1,
+                    0.73,
+                    0.68
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "PartyBeacon",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    1.2,
+                    5,
+                    1.2
+                  ],
+                  "Position": [
+                    -56,
+                    4.8,
+                    10
+                  ],
+                  "Color": [
+                    0.1,
+                    0.73,
+                    0.68
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "SavedWorldArea",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "SavedWorldPlaza",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    28,
+                    0.35,
+                    28
+                  ],
+                  "Position": [
+                    45,
+                    2.15,
+                    19
+                  ],
+                  "Color": [
+                    0.19,
+                    0.27,
+                    0.31
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SavedWorldBoardPanel",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    10,
+                    1
+                  ],
+                  "Position": [
+                    45,
+                    7.5,
+                    9
+                  ],
+                  "Color": [
+                    0.035,
+                    0.09,
+                    0.13
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "SavedWorldBoardAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    18,
+                    0.65,
+                    1.1
+                  ],
+                  "Position": [
+                    45,
+                    12.55,
+                    9
+                  ],
+                  "Color": [
+                    0.19,
+                    0.56,
+                    0.82
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "SavedWorldBeacon",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    1.2,
+                    5,
+                    1.2
+                  ],
+                  "Position": [
+                    34,
+                    4.8,
+                    10
+                  ],
+                  "Color": [
+                    0.19,
+                    0.56,
+                    0.82
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "BoatShopArea",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "BoatShopPlaza",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    28,
+                    0.35,
+                    28
+                  ],
+                  "Position": [
+                    -45,
+                    2.15,
+                    -22
+                  ],
+                  "Color": [
+                    0.19,
+                    0.27,
+                    0.31
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "BoatShopBoardPanel",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    10,
+                    1
+                  ],
+                  "Position": [
+                    -45,
+                    7.5,
+                    -32
+                  ],
+                  "Color": [
+                    0.035,
+                    0.09,
+                    0.13
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "BoatShopBoardAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    18,
+                    0.65,
+                    1.1
+                  ],
+                  "Position": [
+                    -45,
+                    12.55,
+                    -32
+                  ],
+                  "Color": [
+                    0.93,
+                    0.62,
+                    0.25
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "BoatShopBeacon",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    1.2,
+                    5,
+                    1.2
+                  ],
+                  "Position": [
+                    -56,
+                    4.8,
+                    -31
+                  ],
+                  "Color": [
+                    0.93,
+                    0.62,
+                    0.25
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "VIPArea",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "VIPPlaza",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    28,
+                    0.35,
+                    28
+                  ],
+                  "Position": [
+                    45,
+                    2.15,
+                    -22
+                  ],
+                  "Color": [
+                    0.19,
+                    0.27,
+                    0.31
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "VIPBoardPanel",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    18,
+                    10,
+                    1
+                  ],
+                  "Position": [
+                    45,
+                    7.5,
+                    -32
+                  ],
+                  "Color": [
+                    0.035,
+                    0.09,
+                    0.13
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "VIPBoardAccent",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    18,
+                    0.65,
+                    1.1
+                  ],
+                  "Position": [
+                    45,
+                    12.55,
+                    -32
+                  ],
+                  "Color": [
+                    0.61,
+                    0.34,
+                    0.9
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0,
+                  "Orientation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                "children": []
+              },
+              {
+                "name": "VIPBeacon",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    1.2,
+                    5,
+                    1.2
+                  ],
+                  "Position": [
+                    34,
+                    4.8,
+                    -31
+                  ],
+                  "Color": [
+                    0.61,
+                    0.34,
+                    0.9
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "HarborDocks",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "MainPier",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    28,
+                    2.2,
+                    76
+                  ],
+                  "Position": [
+                    0,
+                    1.1,
+                    -89
+                  ],
+                  "Color": [
+                    0.28,
+                    0.18,
+                    0.11
+                  ],
+                  "Material": "WoodPlanks",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "LeftPier",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    14,
+                    2.2,
+                    40
+                  ],
+                  "Position": [
+                    -30,
+                    1.1,
+                    -70
+                  ],
+                  "Color": [
+                    0.31,
+                    0.2,
+                    0.12
+                  ],
+                  "Material": "WoodPlanks",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "RightPier",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    14,
+                    2.2,
+                    40
+                  ],
+                  "Position": [
+                    30,
+                    1.1,
+                    -70
+                  ],
+                  "Color": [
+                    0.31,
+                    0.2,
+                    0.12
+                  ],
+                  "Material": "WoodPlanks",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost-11",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    -11,
+                    4.6,
+                    -58
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost-12",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    -11,
+                    4.6,
+                    -74
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost-13",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    -11,
+                    4.6,
+                    -90
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost-14",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    -11,
+                    4.6,
+                    -106
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost-15",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    -11,
+                    4.6,
+                    -120
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost11",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    11,
+                    4.6,
+                    -58
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost12",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    11,
+                    4.6,
+                    -74
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost13",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    11,
+                    4.6,
+                    -90
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost14",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    11,
+                    4.6,
+                    -106
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailPost15",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    5,
+                    1
+                  ],
+                  "Position": [
+                    11,
+                    4.6,
+                    -120
+                  ],
+                  "Color": [
+                    0.2,
+                    0.12,
+                    0.075
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailLeft",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    0.45,
+                    66
+                  ],
+                  "Position": [
+                    -11,
+                    5.6,
+                    -89
+                  ],
+                  "Color": [
+                    0.24,
+                    0.15,
+                    0.09
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "MainRailRight",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1,
+                    0.45,
+                    66
+                  ],
+                  "Position": [
+                    11,
+                    5.6,
+                    -89
+                  ],
+                  "Color": [
+                    0.24,
+                    0.15,
+                    0.09
+                  ],
+                  "Material": "Wood",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard-11",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    -36,
+                    3.7,
+                    -57
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard-12",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    -36,
+                    3.7,
+                    -73
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard-13",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    -36,
+                    3.7,
+                    -89
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard11",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    36,
+                    3.7,
+                    -57
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard12",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    36,
+                    3.7,
+                    -73
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "SideBollard13",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    1.3,
+                    3.2,
+                    1.3
+                  ],
+                  "Position": [
+                    36,
+                    3.7,
+                    -89
+                  ],
+                  "Color": [
+                    0.92,
+                    0.65,
+                    0.29
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "BoatShowcases",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "StandardBoatShowcase",
+                "className": "Model",
+                "properties": {},
+                "children": [
+                  {
+                    "name": "StandardBoatHull",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        11,
+                        1.8,
+                        23
+                      ],
+                      "Position": [
+                        -30,
+                        3.15,
+                        -69
+                      ],
+                      "Color": [
+                        0.16,
+                        0.3,
+                        0.39
+                      ],
+                      "Material": "SmoothPlastic",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "StandardBoatDeck",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        8,
+                        0.35,
+                        16
+                      ],
+                      "Position": [
+                        -30,
+                        4.2,
+                        -69
+                      ],
+                      "Color": [
+                        0.69,
+                        0.63,
+                        0.43
+                      ],
+                      "Material": "WoodPlanks",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "StandardBoatCabin",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        5,
+                        3,
+                        7
+                      ],
+                      "Position": [
+                        -30,
+                        5.85,
+                        -73
+                      ],
+                      "Color": [
+                        0.79,
+                        0.83,
+                        0.76
+                      ],
+                      "Material": "Metal",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "StandardBoatTurretDisplay",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        4,
+                        1,
+                        4
+                      ],
+                      "Position": [
+                        -30,
+                        7.85,
+                        -64
+                      ],
+                      "Color": [
+                        0.27,
+                        0.33,
+                        0.38
+                      ],
+                      "Material": "Metal",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "VIPBoatShowcase",
+                "className": "Model",
+                "properties": {},
+                "children": [
+                  {
+                    "name": "VIPBoatHull",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        11,
+                        1.8,
+                        23
+                      ],
+                      "Position": [
+                        30,
+                        3.15,
+                        -69
+                      ],
+                      "Color": [
+                        0.17,
+                        0.1,
+                        0.31
+                      ],
+                      "Material": "SmoothPlastic",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "VIPBoatDeck",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        8,
+                        0.35,
+                        16
+                      ],
+                      "Position": [
+                        30,
+                        4.2,
+                        -69
+                      ],
+                      "Color": [
+                        0.36,
+                        0.22,
+                        0.55
+                      ],
+                      "Material": "Metal",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "VIPDanceFloor",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": false,
+                      "CanTouch": false,
+                      "CanQuery": false,
+                      "Size": [
+                        6,
+                        0.18,
+                        7
+                      ],
+                      "Position": [
+                        30,
+                        4.48,
+                        -74
+                      ],
+                      "Color": [
+                        0.96,
+                        0.19,
+                        0.7
+                      ],
+                      "Material": "Neon",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "VIPBoatCabin",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        5,
+                        3,
+                        7
+                      ],
+                      "Position": [
+                        30,
+                        5.85,
+                        -73
+                      ],
+                      "Color": [
+                        0.64,
+                        0.44,
+                        0.84
+                      ],
+                      "Material": "Metal",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  },
+                  {
+                    "name": "VIPAdvancedTurretDisplay",
+                    "className": "Part",
+                    "properties": {
+                      "Anchored": true,
+                      "CanCollide": true,
+                      "CanTouch": true,
+                      "CanQuery": true,
+                      "Size": [
+                        4,
+                        1,
+                        4
+                      ],
+                      "Position": [
+                        30,
+                        7.85,
+                        -64
+                      ],
+                      "Color": [
+                        0.62,
+                        0.36,
+                        0.91
+                      ],
+                      "Material": "Neon",
+                      "Transparency": 0
+                    },
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "SignalLighthouse",
+            "className": "Model",
+            "properties": {},
+            "children": [
+              {
+                "name": "TowerFoot",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    13,
+                    1.5,
+                    13
+                  ],
+                  "Position": [
+                    57,
+                    2.75,
+                    -42
+                  ],
+                  "Color": [
+                    0.23,
+                    0.28,
+                    0.31
+                  ],
+                  "Material": "Slate",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "TowerBody",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    7,
+                    16,
+                    7
+                  ],
+                  "Position": [
+                    57,
+                    11,
+                    -42
+                  ],
+                  "Color": [
+                    0.78,
+                    0.78,
+                    0.72
+                  ],
+                  "Material": "Concrete",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "TowerLanternRoom",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": true,
+                  "CanTouch": true,
+                  "CanQuery": true,
+                  "Size": [
+                    12,
+                    2,
+                    12
+                  ],
+                  "Position": [
+                    57,
+                    20,
+                    -42
+                  ],
+                  "Color": [
+                    0.12,
+                    0.22,
+                    0.27
+                  ],
+                  "Material": "Metal",
+                  "Transparency": 0
+                },
+                "children": []
+              },
+              {
+                "name": "TowerBeacon",
+                "className": "Part",
+                "properties": {
+                  "Anchored": true,
+                  "CanCollide": false,
+                  "CanTouch": false,
+                  "CanQuery": false,
+                  "Size": [
+                    3.5,
+                    3.5,
+                    3.5
+                  ],
+                  "Position": [
+                    57,
+                    22.75,
+                    -42
+                  ],
+                  "Color": [
+                    0.18,
+                    0.86,
+                    0.77
+                  ],
+                  "Material": "Neon",
+                  "Transparency": 0
+                },
+                "children": [
+                  {
+                    "name": "BeaconLight",
+                    "className": "PointLight",
+                    "properties": {
+                      "Enabled": true,
+                      "Brightness": 2.4,
+                      "Range": 64,
+                      "Color": [
+                        0.18,
+                        0.86,
+                        0.77
+                      ],
+                      "Shadows": true
+                    },
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "create",
+      "parent": [
+        {
+          "name": "ReplicatedStorage",
+          "className": "ReplicatedStorage",
+          "ordinal": 1
+        }
+      ],
+      "node": {
+        "name": "BerumidaPrototypeConfig",
+        "className": "ModuleScript",
+        "properties": {},
+        "source": "-- Shared, early-prototype tuning values for the Berumida lobby and later expedition.\n-- Keep monetization identifiers out of this shared module; none are configured yet.\nreturn {\n\tDayCycleSeconds = 180,\n\tDaylightSeconds = 120,\n\tNightSeconds = 60,\n\n\tLobby = {\n\t\tMaxPartySize = 5,\n\t\tMaxPlayersPerSavedWorld = 10,\n\t},\n\n\tVIP = {\n\t\tTargetWalkSpeed = 30,\n\t\tDoubleJumpEnabled = true,\n\t\tBoatSpeedMultiplier = 2,\n\t\tShieldRechargeGameDays = 10,\n\t},\n\n\tBandages = {\n\t\tRegularHealMaxHealthFraction = 0.5,\n\t\tMutantSelfActivationSeconds = 30,\n\t\tMutantAllyReviveSeconds = 30,\n\t},\n}\n",
+        "children": []
+      }
+    },
+    {
+      "op": "create",
+      "parent": [
+        {
+          "name": "ServerScriptService",
+          "className": "ServerScriptService",
+          "ordinal": 1
+        }
+      ],
+      "node": {
+        "name": "ExpeditionClock",
+        "className": "Script",
+        "properties": {
+          "Disabled": false
+        },
+        "source": "-- Early prototype clock. This currently runs in the lobby place so the cycle can be tested.\n-- Move/enable it in the reserved expedition place once that place exists.\nlocal Lighting = game:GetService(\"Lighting\")\nlocal ReplicatedStorage = game:GetService(\"ReplicatedStorage\")\nlocal RunService = game:GetService(\"RunService\")\n\nlocal Config = require(ReplicatedStorage:WaitForChild(\"BerumidaPrototypeConfig\"))\nlocal fullCycleSeconds = Config.DayCycleSeconds\nlocal daylightSeconds = Config.DaylightSeconds\nlocal nightSeconds = Config.NightSeconds\n\nassert(daylightSeconds > 0 and nightSeconds > 0, \"Day and night must both have a duration\")\nassert(daylightSeconds + nightSeconds == fullCycleSeconds, \"Day and night must add up to the full cycle\")\n\nlocal elapsedSeconds = 0\nlocal displayedDay = 1\nlocal displayedNight = false\nlocal refreshAccumulator = 0\n\nLighting:SetAttribute(\"GameDay\", displayedDay)\nLighting:SetAttribute(\"IsNight\", displayedNight)\nLighting:SetAttribute(\"DayCycleSeconds\", fullCycleSeconds)\nLighting:SetAttribute(\"DaylightSeconds\", daylightSeconds)\nLighting:SetAttribute(\"NightSeconds\", nightSeconds)\nLighting:SetAttribute(\"MaxPartySize\", Config.Lobby.MaxPartySize)\nLighting:SetAttribute(\"MaxPlayersPerSavedWorld\", Config.Lobby.MaxPlayersPerSavedWorld)\nLighting.ClockTime = 6\n\nlocal function clockTimeForCycle(cycleSeconds)\n\tif cycleSeconds < daylightSeconds then\n\t\tlocal daytimeProgress = cycleSeconds / daylightSeconds\n\t\treturn 6 + daytimeProgress * 12\n\tend\n\n\tlocal nighttimeProgress = (cycleSeconds - daylightSeconds) / nightSeconds\n\treturn (18 + nighttimeProgress * 12) % 24\nend\n\nRunService.Heartbeat:Connect(function(deltaTime)\n\telapsedSeconds = elapsedSeconds + deltaTime\n\trefreshAccumulator = refreshAccumulator + deltaTime\n\tif refreshAccumulator < 0.1 then\n\t\treturn\n\tend\n\trefreshAccumulator = 0\n\n\tlocal cycleSeconds = elapsedSeconds % fullCycleSeconds\n\tlocal newDay = math.floor(elapsedSeconds / fullCycleSeconds) + 1\n\tlocal isNight = cycleSeconds >= daylightSeconds\n\n\tLighting.ClockTime = clockTimeForCycle(cycleSeconds)\n\n\tif newDay ~= displayedDay then\n\t\tdisplayedDay = newDay\n\t\tLighting:SetAttribute(\"GameDay\", displayedDay)\n\tend\n\tif isNight ~= displayedNight then\n\t\tdisplayedNight = isNight\n\t\tLighting:SetAttribute(\"IsNight\", displayedNight)\n\tend\nend)\n",
+        "children": []
+      }
+    },
+    {
+      "op": "create",
+      "parent": [
+        {
+          "name": "StarterPlayer",
+          "className": "StarterPlayer",
+          "ordinal": 1
+        },
+        {
+          "name": "StarterPlayerScripts",
+          "className": "StarterPlayerScripts",
+          "ordinal": 1
+        }
+      ],
+      "node": {
+        "name": "BerumidaLobbyHUD",
+        "className": "LocalScript",
+        "properties": {
+          "Disabled": false
+        },
+        "source": "-- Safe lobby HUD prototype. Party creation, world loading, purchases, and teleports are not wired yet.\nlocal Lighting = game:GetService(\"Lighting\")\nlocal Players = game:GetService(\"Players\")\nlocal ReplicatedStorage = game:GetService(\"ReplicatedStorage\")\n\nlocal Config = require(ReplicatedStorage:WaitForChild(\"BerumidaPrototypeConfig\"))\nlocal player = Players.LocalPlayer\nlocal playerGui = player:WaitForChild(\"PlayerGui\")\n\nlocal existingGui = playerGui:FindFirstChild(\"BerumidaLobbyHUD\")\nif existingGui then\n\texistingGui:Destroy()\nend\n\nlocal screenGui = Instance.new(\"ScreenGui\")\nscreenGui.Name = \"BerumidaLobbyHUD\"\nscreenGui.ResetOnSpawn = false\nscreenGui.IgnoreGuiInset = false\nscreenGui.DisplayOrder = 20\nscreenGui.Parent = playerGui\n\nlocal panel = Instance.new(\"Frame\")\npanel.Name = \"StatusPanel\"\npanel.AnchorPoint = Vector2.new(0.5, 0)\npanel.Position = UDim2.new(0.5, 0, 0, 14)\npanel.Size = UDim2.new(1, -24, 0, 126)\npanel.BackgroundColor3 = Color3.fromRGB(11, 27, 39)\npanel.BackgroundTransparency = 0.08\npanel.BorderSizePixel = 0\npanel.Parent = screenGui\n\nlocal sizeConstraint = Instance.new(\"UISizeConstraint\")\nsizeConstraint.MinSize = Vector2.new(280, 126)\nsizeConstraint.MaxSize = Vector2.new(560, 126)\nsizeConstraint.Parent = panel\n\nlocal corner = Instance.new(\"UICorner\")\ncorner.CornerRadius = UDim.new(0, 12)\ncorner.Parent = panel\n\nlocal outline = Instance.new(\"UIStroke\")\noutline.Color = Color3.fromRGB(59, 154, 169)\noutline.Thickness = 1.5\noutline.Transparency = 0.12\noutline.Parent = panel\n\nlocal function makeLabel(parent, name, text, position, size, fontSize, color, bold)\n\tlocal label = Instance.new(\"TextLabel\")\n\tlabel.Name = name\n\tlabel.BackgroundTransparency = 1\n\tlabel.Position = position\n\tlabel.Size = size\n\tlabel.Font = bold and Enum.Font.GothamBold or Enum.Font.Gotham\n\tlabel.Text = text\n\tlabel.TextColor3 = color\n\tlabel.TextSize = fontSize\n\tlabel.TextWrapped = true\n\tlabel.TextXAlignment = Enum.TextXAlignment.Left\n\tlabel.TextYAlignment = Enum.TextYAlignment.Center\n\tlabel.Parent = parent\n\treturn label\nend\n\nlocal leftColumn = UDim2.new(1, -146, 0, 28)\nmakeLabel(\n\tpanel,\n\t\"Title\",\n\t\"BERUMIDA-HAVEN\",\n\tUDim2.new(0, 15, 0, 10),\n\tleftColumn,\n\t16,\n\tColor3.fromRGB(244, 248, 250),\n\ttrue\n)\n\nlocal subtitle = makeLabel(\n\tpanel,\n\t\"Subtitle\",\n\t\"Party max. \" .. tostring(Config.Lobby.MaxPartySize) .. \"  •  Wereld max. \" .. tostring(Config.Lobby.MaxPlayersPerSavedWorld),\n\tUDim2.new(0, 16, 0, 41),\n\tUDim2.new(1, -148, 0, 27),\n\t12,\n\tColor3.fromRGB(167, 204, 211),\n\tfalse\n)\nsubtitle.TextTruncate = Enum.TextTruncate.AtEnd\n\nlocal status = makeLabel(\n\tpanel,\n\t\"Status\",\n\t\"Lobbyprototype  •  party en opgeslagen werelden volgen\",\n\tUDim2.new(0, 16, 0, 75),\n\tUDim2.new(1, -148, 0, 37),\n\t11,\n\tColor3.fromRGB(238, 190, 112),\n\tfalse\n)\nstatus.TextTruncate = Enum.TextTruncate.AtEnd\n\nlocal clockPanel = Instance.new(\"Frame\")\nclockPanel.Name = \"ClockPanel\"\nclockPanel.AnchorPoint = Vector2.new(1, 0)\nclockPanel.Position = UDim2.new(1, -12, 0, 18)\nclockPanel.Size = UDim2.new(0, 118, 0, 90)\nclockPanel.BackgroundColor3 = Color3.fromRGB(21, 47, 58)\nclockPanel.BackgroundTransparency = 0.05\nclockPanel.BorderSizePixel = 0\nclockPanel.Parent = panel\n\nlocal clockCorner = Instance.new(\"UICorner\")\nclockCorner.CornerRadius = UDim.new(0, 10)\nclockCorner.Parent = clockPanel\n\nlocal dayLabel = makeLabel(\n\tclockPanel,\n\t\"DayLabel\",\n\t\"DAG 01\",\n\tUDim2.new(0, 6, 0, 8),\n\tUDim2.new(1, -12, 0, 22),\n\t12,\n\tColor3.fromRGB(125, 224, 207),\n\ttrue\n)\ndayLabel.TextXAlignment = Enum.TextXAlignment.Center\n\nlocal timeLabel = makeLabel(\n\tclockPanel,\n\t\"TimeLabel\",\n\t\"06:00\",\n\tUDim2.new(0, 5, 0, 29),\n\tUDim2.new(1, -10, 0, 43),\n\t24,\n\tColor3.fromRGB(255, 255, 255),\n\ttrue\n)\ntimeLabel.TextXAlignment = Enum.TextXAlignment.Center\n\nlocal phaseLabel = makeLabel(\n\tclockPanel,\n\t\"PhaseLabel\",\n\t\"DAGLICHT\",\n\tUDim2.new(0, 5, 1, -21),\n\tUDim2.new(1, -10, 0, 15),\n\t10,\n\tColor3.fromRGB(185, 202, 211),\n\tfalse\n)\nphaseLabel.TextXAlignment = Enum.TextXAlignment.Center\n\nlocal function refreshClock()\n\tlocal day = tonumber(Lighting:GetAttribute(\"GameDay\")) or 1\n\tlocal isNight = Lighting:GetAttribute(\"IsNight\") == true\n\tlocal clockTime = Lighting.ClockTime % 24\n\tlocal hour = math.floor(clockTime)\n\tlocal minute = math.floor((clockTime - hour) * 60 + 0.5) % 60\n\n\tdayLabel.Text = string.format(\"DAG %02d\", day)\n\ttimeLabel.Text = string.format(\"%02d:%02d\", hour, minute)\n\tphaseLabel.Text = isNight and \"NACHT\" or \"DAGLICHT\"\nend\n\nlocal function addWorldSign(lobby, partName, title, detail, accent)\n\tlocal board = lobby:FindFirstChild(partName, true)\n\tif not board or not board:IsA(\"BasePart\") or board:FindFirstChild(\"LobbySignGui\") then\n\t\treturn\n\tend\n\n\tlocal surface = Instance.new(\"SurfaceGui\")\n\tsurface.Name = \"LobbySignGui\"\n\tsurface.Face = Enum.NormalId.Front\n\tsurface.SizingMode = Enum.SurfaceGuiSizingMode.FixedSize\n\tsurface.CanvasSize = Vector2.new(600, 330)\n\tsurface.AlwaysOnTop = true\n\tsurface.LightInfluence = 0\n\tsurface.Parent = board\n\n\tlocal background = Instance.new(\"Frame\")\n\tbackground.Name = \"Background\"\n\tbackground.Size = UDim2.new(1, 0, 1, 0)\n\tbackground.BackgroundColor3 = Color3.fromRGB(10, 24, 34)\n\tbackground.BackgroundTransparency = 0.06\n\tbackground.BorderSizePixel = 0\n\tbackground.Parent = surface\n\n\tlocal accentBar = Instance.new(\"Frame\")\n\taccentBar.Name = \"Accent\"\n\taccentBar.Size = UDim2.new(1, 0, 0, 12)\n\taccentBar.BackgroundColor3 = accent\n\taccentBar.BorderSizePixel = 0\n\taccentBar.Parent = background\n\n\tmakeLabel(\n\t\tbackground,\n\t\t\"SignTitle\",\n\t\ttitle,\n\t\tUDim2.new(0, 22, 0, 36),\n\t\tUDim2.new(1, -44, 0, 120),\n\t\t44,\n\t\tColor3.fromRGB(246, 249, 250),\n\t\ttrue\n\t).TextXAlignment = Enum.TextXAlignment.Center\n\n\tmakeLabel(\n\t\tbackground,\n\t\t\"SignDetail\",\n\t\tdetail,\n\t\tUDim2.new(0, 26, 0, 168),\n\t\tUDim2.new(1, -52, 0, 112),\n\t\t25,\n\t\tColor3.fromRGB(176, 202, 210),\n\t\tfalse\n\t).TextXAlignment = Enum.TextXAlignment.Center\nend\n\ntask.spawn(function()\n\tlocal lobby = workspace:WaitForChild(\"BerumidaLobbyPrototype\", 15)\n\tif not lobby then\n\t\treturn\n\tend\n\n\taddWorldSign(lobby, \"PartyBoardPanel\", \"PARTY\", \"Start met maximaal 5 spelers\", Color3.fromRGB(51, 181, 174))\n\taddWorldSign(lobby, \"SavedWorldBoardPanel\", \"WERELDEN\", \"Join na de eerste vaartocht • max. 10 tegelijk\", Color3.fromRGB(58, 140, 202))\n\taddWorldSign(lobby, \"BoatShopBoardPanel\", \"BOTENSHOP\", \"Gewone boten • showroom\", Color3.fromRGB(224, 161, 67))\n\taddWorldSign(lobby, \"VIPBoardPanel\", \"VIP\", \"Exclusieve boot • starter kit\", Color3.fromRGB(158, 93, 226))\n\taddWorldSign(lobby, \"ResearchMapBoardPanel\", \"BERUMIDA-DRIEHOEK\", \"Oceaanonderzoeksgebied\", Color3.fromRGB(92, 211, 193))\nend)\n\nLighting:GetAttributeChangedSignal(\"GameDay\"):Connect(refreshClock)\nLighting:GetAttributeChangedSignal(\"IsNight\"):Connect(refreshClock)\nLighting:GetPropertyChangedSignal(\"ClockTime\"):Connect(refreshClock)\nrefreshClock()\n",
+        "children": []
+      }
+    }
+  ]
+}
