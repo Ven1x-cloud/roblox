@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "starter-obby-example-v1",
+  "summary": "Maak een kleine, verankerde obby-start met een startpunt en een lamp.",
+  "operations": [
+    {
+      "op": "create",
+      "parent": [
+        { "name": "Workspace", "className": "Workspace", "ordinal": 1 }
+      ],
+      "node": {
+        "name": "StarterObby",
+        "className": "Model",
+        "properties": {},
+        "children": [
+          {
+            "name": "Ground",
+            "className": "Part",
+            "properties": {
+              "Anchored": true,
+              "Size": [30, 1, 30],
+              "Position": [0, 0, 0],
+              "Color": [0.22, 0.52, 0.31],
+              "Material": "Grass",
+              "Shape": "Block"
+            },
+            "children": []
+          },
+          {
+            "name": "StartPlatform",
+            "className": "Part",
+            "properties": {
+              "Anchored": true,
+              "Size": [8, 1, 8],
+              "Position": [0, 3, 0],
+              "Color": [0.25, 0.62, 0.95],
+              "Material": "SmoothPlastic",
+              "Shape": "Block"
+            },
+            "children": []
+          },
+          {
+            "name": "Checkpoint",
+            "className": "SpawnLocation",
+            "properties": {
+              "Anchored": true,
+              "Size": [6, 1, 6],
+              "Position": [0, 1, -8],
+              "Color": [0.18, 0.8, 0.55],
+              "Material": "Neon",
+              "Neutral": true,
+              "Duration": 0
+            },
+            "children": []
+          },
+          {
+            "name": "Lantern",
+            "className": "Part",
+            "properties": {
+              "Anchored": true,
+              "Size": [1, 5, 1],
+              "Position": [7, 3, 0],
+              "Color": [0.25, 0.2, 0.14],
+              "Material": "Wood",
+              "Shape": "Block"
+            },
+            "children": [
+              {
+                "name": "WarmLight",
+                "className": "PointLight",
+                "properties": {
+                  "Enabled": true,
+                  "Brightness": 1.5,
+                  "Range": 16,
+                  "Color": [1, 0.74, 0.38],
+                  "Shadows": true
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
